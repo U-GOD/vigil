@@ -1,0 +1,42 @@
+# Local-only planning docs — never commit
+IMPLEMENTATION_PLAN.md
+ops/spikes.md
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+.pnpm-store/
+
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+!contracts/broadcast/**/dry-run/
+
+# Envio
+.envio/
+generated/
+
+# Next.js
+apps/web/.next/
+apps/web/out/
+
+# Logs and runtime state
+*.log
+logs/
+.keeper-state/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
