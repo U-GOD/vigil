@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install forge-std
+        run: git clone --depth 1 --branch v1.9.6 https://github.com/foundry-rs/forge-std contracts/lib/forge-std
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: JS tests
+        run: pnpm -r test
+
+      - name: Forge fmt
+        run: forge fmt --check --root contracts
+
+      - name: Forge tests
+        run: forge test --root contracts
