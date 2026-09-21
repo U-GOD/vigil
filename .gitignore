@@ -1,5 +1,6 @@
 # Local-only planning docs — never commit
 IMPLEMENTATION_PLAN.md
+TASK.md
 ops/spikes.md
 
 # Secrets
@@ -19,6 +20,7 @@ build/
 contracts/out/
 contracts/cache/
 contracts/broadcast/
+contracts/lib/
 !contracts/broadcast/**/dry-run/
 
 # Envio
