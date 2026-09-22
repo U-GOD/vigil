@@ -1,0 +1,78 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+
+import {Fixture} from "./helpers/Fixture.sol";
+import {SessionRegistry} from "../src/registry/SessionRegistry.sol";
+import {CorporateActionRegistry} from "../src/oracle/CorporateActionRegistry.sol";
+import {InjectedPrintOracle} from "../src/oracle/InjectedPrintOracle.sol";
+import {ISessionRegistry} from "../src/interfaces/ISessionRegistry.sol";
+import {IPrintOracle} from "../src/interfaces/IPrintOracle.sol";
+import {ClosureMath} from "../src/libs/ClosureMath.sol";
+
+contract RegistryTest is Fixture {
+    function test_sessionRejectsBadWindow() public {
+        ISessionRegistry.Session memory s = ISessionRegistry.Session({
+            exchange: keccak256("XNYS"),
+            closeTs: 100,
+            openTs: 90,
+            fallbackDeadline: 200,
+            printBandSecs: 1,
+            active: true
+        });
+        vm.expectRevert(SessionRegistry.InvalidWindow.selector);
+        sessions.createSession(2, s);
+    }
+
+    function test_sessionExistsOnce() public {
+        assertTrue(sessions.exists(SESSION));
+        vm.expectRevert(SessionRegistry.SessionExists.selector);
+        sessions.createSession(
+            SESSION,
+            ISessionRegistry.Session({
+                exchange: keccak256("XNYS"),
+                closeTs: uint64(block.timestamp + 10),
+                openTs: uint64(block.timestamp + 20),
+                fallbackDeadline: uint64(block.timestamp + 30),
+                printBandSecs: 1,
+                active: true
+            })
+        );
+        vm.expectRevert(SessionRegistry.SessionMissing.selector);
+        sessions.sessionOf(99);
+    }
+
+    function test_adjDefaultAndPreClose() public {
+        assertEq(corp.adjOf(TICKER, SESSION), ClosureMath.WAD);
+        corp.setAdj(TICKER, SESSION, 5e17);
+        assertEq(corp.adjOf(TICKER, SESSION), 5e17);
+        vm.warp(block.timestamp + 1 days);
+        vm.expectRevert(CorporateActionRegistry.SessionClosed.selector);
+        corp.setAdj(TICKER, SESSION, ClosureMath.WAD);
+    }
+
+    function test_adjRejectsZero() public {
+        vm.expectRevert(CorporateActionRegistry.InvalidAdj.selector);
+        corp.setAdj(TICKER, SESSION, 0);
+    }
+
+    function test_adjChangesSplit() public {
+        corp.setAdj(TICKER, SESSION, 5e17);
+        (bytes32 id,,) = _createDefault();
+        _fund(address(this), 1_000_000);
+        vault.mintPair(id, 1_000_000, address(this));
+        _finalizeAt(id, 50e18);
+        (uint256 sUp,) = settlement.settlementOf(id);
+        assertEq(sUp, 5e17);
+    }
+
+    function test_injectOnceAndNonZero() public {
+        vm.expectRevert(InjectedPrintOracle.InvalidPrice.selector);
+        oracle.inject(TICKER, SESSION, IPrintOracle.PrintKind.Close, 0);
+        oracle.inject(TICKER, SESSION, IPrintOracle.PrintKind.Close, PRICE);
+        vm.expectRevert(InjectedPrintOracle.AlreadyFinalized.selector);
+        oracle.inject(TICKER, SESSION, IPrintOracle.PrintKind.Close, PRICE);
+        (uint256 price, bool ok) = oracle.printOf(TICKER, SESSION, IPrintOracle.PrintKind.Close);
+        assertEq(price, PRICE);
+        assertTrue(ok);
+    }
+}
