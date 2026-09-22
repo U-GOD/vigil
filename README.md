@@ -273,6 +273,8 @@ flowchart TB
     end
 ```
 
+I1 and I2 hold while a market is live: mint and pair-burn change both supplies together. After finalization, one-sided redeem is allowed and I4 is the solvency check (`collateralHeld >= payoutUp(supplyUp) + payoutDn(supplyDn)`).
+
 - Settlement references the official opening auction, not a DEX TWAP. An attacker has to move that print, not a thin onchain pool.
 - A stalled oracle is a symmetric refund, not a solvency event.
 - A manipulated during-window anchor does not change settlement. Arbitrageurs take the dislocation.
@@ -297,9 +299,9 @@ The TypeScript payoff used by agents and keepers is tested against the Solidity 
 
 ## Status
 
-The protocol specification is frozen in this repository. Implementation is in progress. Nothing in this document should be read as a live deployment, a listed market, or a promise of return.
+Issuance and settlement contracts are implemented: `ClosureMath`, `ClosureNote`, `ClosureVault`, `ClosureMarketFactory`, `SettlementEngine`, plus `SessionRegistry` and `CorporateActionRegistry`. Until the multi-reporter `PrintOracle` ships, settlement reads `InjectedPrintOracle` — an owner-injected print, not a quorum. Testnet collateral is `TestCollateral` (VUSD), a 6-decimal stand-in, not a native stablecoin listing.
 
-Testnet work, when published, will state plainly which assets are native listings and which are stand-in spot proxies, and will point every displayed number at a transaction, an oracle submission, or a named data source.
+Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
 
