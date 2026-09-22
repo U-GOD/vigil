@@ -30,6 +30,9 @@ jobs:
       - name: Install forge-std
         run: git clone --depth 1 --branch v1.9.6 https://github.com/foundry-rs/forge-std contracts/lib/forge-std
 
+      - name: Install OpenZeppelin
+        run: git clone --depth 1 --branch v5.2.0 https://github.com/OpenZeppelin/openzeppelin-contracts contracts/lib/openzeppelin-contracts
+
       - name: Typecheck
         run: pnpm typecheck
 
