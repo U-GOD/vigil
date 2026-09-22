@@ -11,6 +11,7 @@ describe("deployments", () => {
     expect(d.kuru.accountCore).toBe("0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22");
     expect(d.kuru.spotRouter).toBe("0xba24a1042701f06e8F7edCF04389260D1Fa4c697");
     expect(d.pyth).toBe("0x2880aB155794e7179c9eE2e38200202908C17B43");
+    expect(d.core.factory).toBeNull();
   });
 
   it("rejects an unknown chain", () => {
