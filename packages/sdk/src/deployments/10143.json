@@ -8,5 +8,14 @@
     "faucet": "0x25B1416FcD3400bE2D8F50bbe7Cf1101b8B891E9",
     "monUsdc": "0xfdbE356828c8f5A5d5ed4f69ddE0816f4058Ef61"
   },
-  "pyth": "0x2880aB155794e7179c9eE2e38200202908C17B43"
+  "pyth": "0x2880aB155794e7179c9eE2e38200202908C17B43",
+  "core": {
+    "sessions": null,
+    "corpActions": null,
+    "oracle": null,
+    "settlement": null,
+    "vault": null,
+    "factory": null,
+    "collateral": null
+  }
 }
