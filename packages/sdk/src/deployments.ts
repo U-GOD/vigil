@@ -9,11 +9,22 @@ export type KuruAddresses = {
   monUsdc: Address;
 };
 
+export type CoreAddresses = {
+  sessions: Address | null;
+  corpActions: Address | null;
+  oracle: Address | null;
+  settlement: Address | null;
+  vault: Address | null;
+  factory: Address | null;
+  collateral: Address | null;
+};
+
 export type NetworkDeployments = {
   chainId: number;
   ping: Address | null;
   kuru: KuruAddresses;
   pyth: Address;
+  core: CoreAddresses;
 };
 
 const byChain: Record<number, NetworkDeployments> = {
@@ -39,7 +50,20 @@ function parseDeployments(raw: typeof raw10143): NetworkDeployments {
       monUsdc: asAddress(raw.kuru.monUsdc, "kuru.monUsdc"),
     },
     pyth: asAddress(raw.pyth, "pyth"),
+    core: {
+      sessions: optionalAddress(raw.core.sessions, "core.sessions"),
+      corpActions: optionalAddress(raw.core.corpActions, "core.corpActions"),
+      oracle: optionalAddress(raw.core.oracle, "core.oracle"),
+      settlement: optionalAddress(raw.core.settlement, "core.settlement"),
+      vault: optionalAddress(raw.core.vault, "core.vault"),
+      factory: optionalAddress(raw.core.factory, "core.factory"),
+      collateral: optionalAddress(raw.core.collateral, "core.collateral"),
+    },
   };
+}
+
+function optionalAddress(value: string | null, label: string): Address | null {
+  return value === null ? null : asAddress(value, label);
 }
 
 export function loadDeployments(chainId: number): NetworkDeployments {
