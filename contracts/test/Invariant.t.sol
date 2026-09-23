@@ -195,7 +195,12 @@ contract Handler is Test {
         if (block.timestamp >= closeTs) return;
         adj = bound(adj, 1, 10e18);
         vm.prank(owner);
-        try corp.setAdj(tickers[0], sessionId, adj) {} catch {}
+        try corp.scheduleAdj(tickers[0], sessionId, adj) {}
+        catch {
+            return;
+        }
+        vm.warp(block.timestamp + corp.adjDelay());
+        try corp.executeAdj(tickers[0], sessionId) {} catch {}
     }
 
     function _notes(
