@@ -16,6 +16,7 @@
     "settlement": null,
     "vault": null,
     "factory": null,
-    "collateral": null
+    "collateral": null,
+    "listing": null
   }
 }
