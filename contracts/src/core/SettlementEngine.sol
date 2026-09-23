@@ -110,10 +110,7 @@ contract SettlementEngine is ISettlement, Ownable {
         if (m.state != State.Halted && m.state != State.Trading) revert WrongState();
         ISessionRegistry.Session memory session = sessions.sessionOf(m.sessionId);
         if (block.timestamp < session.fallbackDeadline) revert TooEarly();
-        m.sUp = ClosureMath.neutralSplit(m.kUp, m.kDn);
-        m.state = State.FallbackFinalized;
-        if (address(bondRefund) != address(0)) bondRefund.onSettled(marketId);
-        emit Finalized(marketId, m.sUp, true);
+        _freezeNeutral(m, marketId);
     }
 
     function finalizeBatch(
@@ -130,11 +127,14 @@ contract SettlementEngine is ISettlement, Ownable {
     ) internal {
         Market storage m = _market(marketId);
         if (m.state != State.Halted) revert WrongState();
+        if (corpActions.delisted(m.ticker, m.sessionId)) {
+            _freezeNeutral(m, marketId);
+            return;
+        }
 
         (uint256 pClose, bool closeOk) =
             oracle.printOf(m.ticker, m.sessionId, IPrintOracle.PrintKind.Close);
-        (uint256 pOpen, bool openOk) =
-            oracle.printOf(m.ticker, m.sessionId, IPrintOracle.PrintKind.Open);
+        (uint256 pOpen, bool openOk) = _resolveOpen(m.ticker, m.sessionId);
         if (!closeOk || !openOk) revert PrintsMissing();
 
         uint256 adj = corpActions.adjOf(m.ticker, m.sessionId);
@@ -142,6 +142,31 @@ contract SettlementEngine is ISettlement, Ownable {
         m.state = State.Finalized;
         if (address(bondRefund) != address(0)) bondRefund.onSettled(marketId);
         emit Finalized(marketId, m.sUp, false);
+    }
+
+    function _resolveOpen(
+        bytes32 ticker,
+        uint64 sessionId
+    ) internal view returns (uint256 price, bool ok) {
+        (price, ok) = oracle.printOf(ticker, sessionId, IPrintOracle.PrintKind.Open);
+        if (ok) return (price, true);
+        uint64 cursor = sessionId;
+        for (uint256 hop; hop < 4; ++hop) {
+            if (!sessions.noAuction(cursor)) return (0, false);
+            uint64 next = sessions.successorOf(cursor);
+            if (next == 0) return (0, false);
+            (price, ok) = oracle.printOf(ticker, next, IPrintOracle.PrintKind.Open);
+            if (ok) return (price, true);
+            cursor = next;
+        }
+        return (0, false);
+    }
+
+    function _freezeNeutral(Market storage m, bytes32 marketId) internal {
+        m.sUp = ClosureMath.neutralSplit(m.kUp, m.kDn);
+        m.state = State.FallbackFinalized;
+        if (address(bondRefund) != address(0)) bondRefund.onSettled(marketId);
+        emit Finalized(marketId, m.sUp, true);
     }
 
     function isHalted(
