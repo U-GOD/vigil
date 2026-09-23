@@ -33,7 +33,7 @@ contract Fixture is Test {
 
     function setUp() public virtual {
         sessions = new SessionRegistry(address(this));
-        corp = new CorporateActionRegistry(address(this), sessions);
+        corp = new CorporateActionRegistry(address(this), sessions, 1);
         oracle = new InjectedPrintOracle(address(this));
         settlement = new SettlementEngine(address(this), sessions, oracle, corp);
         vault = new ClosureVault(address(this), settlement, feeSink, 3);
