@@ -299,7 +299,7 @@ The TypeScript payoff used by agents and keepers is tested against the Solidity 
 
 ## Status
 
-Issuance and settlement contracts are implemented: `ClosureMath`, `ClosureNote`, `ClosureVault`, `ClosureMarketFactory`, `SettlementEngine`, plus `SessionRegistry` and `CorporateActionRegistry`. Until the multi-reporter `PrintOracle` ships, settlement reads `InjectedPrintOracle` — an owner-injected print, not a quorum. Testnet collateral is `TestCollateral` (VUSD), a 6-decimal stand-in, not a native stablecoin listing.
+Issuance and settlement contracts are implemented. Production prints come from `PrintOracle`: a reporter quorum, a deviation bound, and a bonded dispute that can only void a print. `PythPrintReporter` pulls an Equity.US Pyth update and submits it when the publish time sits in the session's print band. `SessionRegistry` holds both compressed `VIGIL_SYNTH` windows and the NYSE cash calendar; Nasdaq cash equities use those same dates. Corporate-action adjustments and delist flags are timelocked and cannot be applied after their deadline. `InjectedPrintOracle` is a test helper and is not on the deploy path. Testnet collateral is `TestCollateral` (VUSD), a 6-decimal stand-in, not a native stablecoin listing.
 
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
