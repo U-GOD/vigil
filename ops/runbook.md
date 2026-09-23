@@ -98,6 +98,41 @@ forge script script/SeedSessions.s.sol:SeedSessions --rpc-url monad_testnet --br
 
 ## Phase 4
 
+Local:
+
+```
+pnpm --filter @vigil/sdk test
+forge test --root contracts --match-contract ListingAdapterTest
+```
+
+Set `MONAD_RPC_URL` for that run. `test_monUsdcBookIsVerified` then forks chain 10143 and checks the live MON/USDC book. Without the variable the test skips.
+
+The listing adapter records a request and binds a book Kuru has already registered. It does not create markets. `requireBound` reverts until both books verify on SpotRouter and AccountCore and the spec matches with no delta. Passive spread is checked through `computeAddress`, because `getMarketParams` does not return it.
+
+Onboarding, once the deployer holds MON:
+
+```
+node packages/sdk/scripts/kuruAccount.mjs
+node packages/sdk/scripts/kuruAccount.mjs --broadcast
+```
+
+Dry-run prints the faucet `claim`, the USDC approve, and the AccountCore deposit. Broadcast also reads `ACCOUNT_PERMISSION_TRADE` and, when `TRADE_SIGNER` is set, authorizes that signer with only that permission. The same three calls are in `contracts/script/AccountDeposit.s.sol`.
+
+After `FACTORY` and `VAULT` exist:
+
+```
+cd contracts
+forge script script/DeployListing.s.sol:DeployListing --rpc-url monad_testnet --broadcast
+```
+
+Write the adapter into `LISTING_ADAPTER` and `packages/sdk/src/deployments/10143.json` (`core.listing`). Passive inventory is `contracts/script/SeedPassive.s.sol`. It calls `requireBound` and then `mintPassiveLiquidity` on the bound book. Set `LEG=dn` for the down book.
+
+**Listing.** `research/kuru-bounty/listing-request.md` was drafted on 2026-09-21 and has not been sent. No Closure Note book is registered.
+
+**Dated fallback (decided 2026-09-23).** If Kuru has not registered the CN books by 2026-10-07, note trading moves to a Vigil-operated RFQ/escrow labelled as a temporary venue. That escrow is not part of this phase. Until a bind succeeds, keepers and the plugin refuse the market. Encoder tests target the live MON/USDC book `0xfdbE356828c8f5A5d5ed4f69ddE0816f4058Ef61`. That book is not a Closure Note market.
+
+**BLOCKED:** deployer still has 0 MON, so the faucet deposit, a listing bind, and a passive seed cannot be broadcast. The listing request has not been sent.
+
 ## Phase 5
 
 ## Phase 6
