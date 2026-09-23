@@ -26,7 +26,9 @@ contract DeployCore is Script {
         vm.startBroadcast(pk);
 
         SessionRegistry sessions = new SessionRegistry(owner);
-        CorporateActionRegistry corp = new CorporateActionRegistry(owner, sessions);
+        CorporateActionRegistry corp = new CorporateActionRegistry(
+            owner, sessions, uint64(vm.envOr("ADJ_DELAY", uint256(3600)))
+        );
         InjectedPrintOracle oracle = new InjectedPrintOracle(owner);
         SettlementEngine settlement = new SettlementEngine(owner, sessions, oracle, corp);
         ClosureVault vault = new ClosureVault(owner, settlement, feeSink, mintFeeBps);
