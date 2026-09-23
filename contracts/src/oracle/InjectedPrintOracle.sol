@@ -4,8 +4,8 @@ pragma solidity ^0.8.28;
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IPrintOracle} from "../interfaces/IPrintOracle.sol";
 
-/// @notice Phase-2 settlement path: the owner injects official prints.
-/// Phase 3 replaces this with the multi-reporter PrintOracle.
+/// @notice Test helper. The owner writes a print directly.
+/// Production settlement uses PrintOracle. This contract is not on that path.
 contract InjectedPrintOracle is IPrintOracle, Ownable {
     error InvalidPrice();
     error AlreadyFinalized();
