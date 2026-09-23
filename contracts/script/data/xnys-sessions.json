@@ -1,0 +1,2021 @@
+{
+  "count": 252,
+  "sessions": [
+    {
+      "id": 20260923,
+      "closeTs": 1790193600,
+      "openTs": 1790256600,
+      "fallbackDeadline": 1790263800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20260924,
+      "closeTs": 1790280000,
+      "openTs": 1790343000,
+      "fallbackDeadline": 1790350200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20260925,
+      "closeTs": 1790366400,
+      "openTs": 1790602200,
+      "fallbackDeadline": 1790609400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20260928,
+      "closeTs": 1790625600,
+      "openTs": 1790688600,
+      "fallbackDeadline": 1790695800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20260929,
+      "closeTs": 1790712000,
+      "openTs": 1790775000,
+      "fallbackDeadline": 1790782200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20260930,
+      "closeTs": 1790798400,
+      "openTs": 1790861400,
+      "fallbackDeadline": 1790868600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261001,
+      "closeTs": 1790884800,
+      "openTs": 1790947800,
+      "fallbackDeadline": 1790955000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261002,
+      "closeTs": 1790971200,
+      "openTs": 1791207000,
+      "fallbackDeadline": 1791214200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261005,
+      "closeTs": 1791230400,
+      "openTs": 1791293400,
+      "fallbackDeadline": 1791300600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261006,
+      "closeTs": 1791316800,
+      "openTs": 1791379800,
+      "fallbackDeadline": 1791387000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261007,
+      "closeTs": 1791403200,
+      "openTs": 1791466200,
+      "fallbackDeadline": 1791473400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261008,
+      "closeTs": 1791489600,
+      "openTs": 1791552600,
+      "fallbackDeadline": 1791559800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261009,
+      "closeTs": 1791576000,
+      "openTs": 1791811800,
+      "fallbackDeadline": 1791819000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261012,
+      "closeTs": 1791835200,
+      "openTs": 1791898200,
+      "fallbackDeadline": 1791905400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261013,
+      "closeTs": 1791921600,
+      "openTs": 1791984600,
+      "fallbackDeadline": 1791991800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261014,
+      "closeTs": 1792008000,
+      "openTs": 1792071000,
+      "fallbackDeadline": 1792078200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261015,
+      "closeTs": 1792094400,
+      "openTs": 1792157400,
+      "fallbackDeadline": 1792164600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261016,
+      "closeTs": 1792180800,
+      "openTs": 1792416600,
+      "fallbackDeadline": 1792423800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261019,
+      "closeTs": 1792440000,
+      "openTs": 1792503000,
+      "fallbackDeadline": 1792510200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261020,
+      "closeTs": 1792526400,
+      "openTs": 1792589400,
+      "fallbackDeadline": 1792596600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261021,
+      "closeTs": 1792612800,
+      "openTs": 1792675800,
+      "fallbackDeadline": 1792683000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261022,
+      "closeTs": 1792699200,
+      "openTs": 1792762200,
+      "fallbackDeadline": 1792769400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261023,
+      "closeTs": 1792785600,
+      "openTs": 1793021400,
+      "fallbackDeadline": 1793028600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261026,
+      "closeTs": 1793044800,
+      "openTs": 1793107800,
+      "fallbackDeadline": 1793115000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261027,
+      "closeTs": 1793131200,
+      "openTs": 1793194200,
+      "fallbackDeadline": 1793201400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261028,
+      "closeTs": 1793217600,
+      "openTs": 1793280600,
+      "fallbackDeadline": 1793287800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261029,
+      "closeTs": 1793304000,
+      "openTs": 1793367000,
+      "fallbackDeadline": 1793374200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261030,
+      "closeTs": 1793390400,
+      "openTs": 1793629800,
+      "fallbackDeadline": 1793637000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261102,
+      "closeTs": 1793653200,
+      "openTs": 1793716200,
+      "fallbackDeadline": 1793723400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261103,
+      "closeTs": 1793739600,
+      "openTs": 1793802600,
+      "fallbackDeadline": 1793809800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261104,
+      "closeTs": 1793826000,
+      "openTs": 1793889000,
+      "fallbackDeadline": 1793896200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261105,
+      "closeTs": 1793912400,
+      "openTs": 1793975400,
+      "fallbackDeadline": 1793982600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261106,
+      "closeTs": 1793998800,
+      "openTs": 1794234600,
+      "fallbackDeadline": 1794241800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261109,
+      "closeTs": 1794258000,
+      "openTs": 1794321000,
+      "fallbackDeadline": 1794328200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261110,
+      "closeTs": 1794344400,
+      "openTs": 1794407400,
+      "fallbackDeadline": 1794414600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261111,
+      "closeTs": 1794430800,
+      "openTs": 1794493800,
+      "fallbackDeadline": 1794501000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261112,
+      "closeTs": 1794517200,
+      "openTs": 1794580200,
+      "fallbackDeadline": 1794587400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261113,
+      "closeTs": 1794603600,
+      "openTs": 1794839400,
+      "fallbackDeadline": 1794846600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261116,
+      "closeTs": 1794862800,
+      "openTs": 1794925800,
+      "fallbackDeadline": 1794933000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261117,
+      "closeTs": 1794949200,
+      "openTs": 1795012200,
+      "fallbackDeadline": 1795019400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261118,
+      "closeTs": 1795035600,
+      "openTs": 1795098600,
+      "fallbackDeadline": 1795105800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261119,
+      "closeTs": 1795122000,
+      "openTs": 1795185000,
+      "fallbackDeadline": 1795192200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261120,
+      "closeTs": 1795208400,
+      "openTs": 1795444200,
+      "fallbackDeadline": 1795451400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261123,
+      "closeTs": 1795467600,
+      "openTs": 1795530600,
+      "fallbackDeadline": 1795537800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261124,
+      "closeTs": 1795554000,
+      "openTs": 1795617000,
+      "fallbackDeadline": 1795624200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261125,
+      "closeTs": 1795640400,
+      "openTs": 1795789800,
+      "fallbackDeadline": 1795797000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261127,
+      "closeTs": 1795802400,
+      "openTs": 1796049000,
+      "fallbackDeadline": 1796056200,
+      "printBandSecs": 1800,
+      "early": true
+    },
+    {
+      "id": 20261130,
+      "closeTs": 1796072400,
+      "openTs": 1796135400,
+      "fallbackDeadline": 1796142600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261201,
+      "closeTs": 1796158800,
+      "openTs": 1796221800,
+      "fallbackDeadline": 1796229000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261202,
+      "closeTs": 1796245200,
+      "openTs": 1796308200,
+      "fallbackDeadline": 1796315400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261203,
+      "closeTs": 1796331600,
+      "openTs": 1796394600,
+      "fallbackDeadline": 1796401800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261204,
+      "closeTs": 1796418000,
+      "openTs": 1796653800,
+      "fallbackDeadline": 1796661000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261207,
+      "closeTs": 1796677200,
+      "openTs": 1796740200,
+      "fallbackDeadline": 1796747400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261208,
+      "closeTs": 1796763600,
+      "openTs": 1796826600,
+      "fallbackDeadline": 1796833800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261209,
+      "closeTs": 1796850000,
+      "openTs": 1796913000,
+      "fallbackDeadline": 1796920200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261210,
+      "closeTs": 1796936400,
+      "openTs": 1796999400,
+      "fallbackDeadline": 1797006600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261211,
+      "closeTs": 1797022800,
+      "openTs": 1797258600,
+      "fallbackDeadline": 1797265800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261214,
+      "closeTs": 1797282000,
+      "openTs": 1797345000,
+      "fallbackDeadline": 1797352200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261215,
+      "closeTs": 1797368400,
+      "openTs": 1797431400,
+      "fallbackDeadline": 1797438600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261216,
+      "closeTs": 1797454800,
+      "openTs": 1797517800,
+      "fallbackDeadline": 1797525000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261217,
+      "closeTs": 1797541200,
+      "openTs": 1797604200,
+      "fallbackDeadline": 1797611400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261218,
+      "closeTs": 1797627600,
+      "openTs": 1797863400,
+      "fallbackDeadline": 1797870600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261221,
+      "closeTs": 1797886800,
+      "openTs": 1797949800,
+      "fallbackDeadline": 1797957000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261222,
+      "closeTs": 1797973200,
+      "openTs": 1798036200,
+      "fallbackDeadline": 1798043400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261223,
+      "closeTs": 1798059600,
+      "openTs": 1798122600,
+      "fallbackDeadline": 1798129800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261224,
+      "closeTs": 1798135200,
+      "openTs": 1798468200,
+      "fallbackDeadline": 1798475400,
+      "printBandSecs": 1800,
+      "early": true
+    },
+    {
+      "id": 20261228,
+      "closeTs": 1798491600,
+      "openTs": 1798554600,
+      "fallbackDeadline": 1798561800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261229,
+      "closeTs": 1798578000,
+      "openTs": 1798641000,
+      "fallbackDeadline": 1798648200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261230,
+      "closeTs": 1798664400,
+      "openTs": 1798727400,
+      "fallbackDeadline": 1798734600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20261231,
+      "closeTs": 1798750800,
+      "openTs": 1799073000,
+      "fallbackDeadline": 1799080200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270104,
+      "closeTs": 1799096400,
+      "openTs": 1799159400,
+      "fallbackDeadline": 1799166600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270105,
+      "closeTs": 1799182800,
+      "openTs": 1799245800,
+      "fallbackDeadline": 1799253000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270106,
+      "closeTs": 1799269200,
+      "openTs": 1799332200,
+      "fallbackDeadline": 1799339400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270107,
+      "closeTs": 1799355600,
+      "openTs": 1799418600,
+      "fallbackDeadline": 1799425800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270108,
+      "closeTs": 1799442000,
+      "openTs": 1799677800,
+      "fallbackDeadline": 1799685000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270111,
+      "closeTs": 1799701200,
+      "openTs": 1799764200,
+      "fallbackDeadline": 1799771400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270112,
+      "closeTs": 1799787600,
+      "openTs": 1799850600,
+      "fallbackDeadline": 1799857800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270113,
+      "closeTs": 1799874000,
+      "openTs": 1799937000,
+      "fallbackDeadline": 1799944200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270114,
+      "closeTs": 1799960400,
+      "openTs": 1800023400,
+      "fallbackDeadline": 1800030600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270115,
+      "closeTs": 1800046800,
+      "openTs": 1800369000,
+      "fallbackDeadline": 1800376200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270119,
+      "closeTs": 1800392400,
+      "openTs": 1800455400,
+      "fallbackDeadline": 1800462600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270120,
+      "closeTs": 1800478800,
+      "openTs": 1800541800,
+      "fallbackDeadline": 1800549000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270121,
+      "closeTs": 1800565200,
+      "openTs": 1800628200,
+      "fallbackDeadline": 1800635400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270122,
+      "closeTs": 1800651600,
+      "openTs": 1800887400,
+      "fallbackDeadline": 1800894600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270125,
+      "closeTs": 1800910800,
+      "openTs": 1800973800,
+      "fallbackDeadline": 1800981000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270126,
+      "closeTs": 1800997200,
+      "openTs": 1801060200,
+      "fallbackDeadline": 1801067400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270127,
+      "closeTs": 1801083600,
+      "openTs": 1801146600,
+      "fallbackDeadline": 1801153800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270128,
+      "closeTs": 1801170000,
+      "openTs": 1801233000,
+      "fallbackDeadline": 1801240200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270129,
+      "closeTs": 1801256400,
+      "openTs": 1801492200,
+      "fallbackDeadline": 1801499400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270201,
+      "closeTs": 1801515600,
+      "openTs": 1801578600,
+      "fallbackDeadline": 1801585800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270202,
+      "closeTs": 1801602000,
+      "openTs": 1801665000,
+      "fallbackDeadline": 1801672200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270203,
+      "closeTs": 1801688400,
+      "openTs": 1801751400,
+      "fallbackDeadline": 1801758600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270204,
+      "closeTs": 1801774800,
+      "openTs": 1801837800,
+      "fallbackDeadline": 1801845000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270205,
+      "closeTs": 1801861200,
+      "openTs": 1802097000,
+      "fallbackDeadline": 1802104200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270208,
+      "closeTs": 1802120400,
+      "openTs": 1802183400,
+      "fallbackDeadline": 1802190600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270209,
+      "closeTs": 1802206800,
+      "openTs": 1802269800,
+      "fallbackDeadline": 1802277000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270210,
+      "closeTs": 1802293200,
+      "openTs": 1802356200,
+      "fallbackDeadline": 1802363400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270211,
+      "closeTs": 1802379600,
+      "openTs": 1802442600,
+      "fallbackDeadline": 1802449800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270212,
+      "closeTs": 1802466000,
+      "openTs": 1802788200,
+      "fallbackDeadline": 1802795400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270216,
+      "closeTs": 1802811600,
+      "openTs": 1802874600,
+      "fallbackDeadline": 1802881800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270217,
+      "closeTs": 1802898000,
+      "openTs": 1802961000,
+      "fallbackDeadline": 1802968200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270218,
+      "closeTs": 1802984400,
+      "openTs": 1803047400,
+      "fallbackDeadline": 1803054600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270219,
+      "closeTs": 1803070800,
+      "openTs": 1803306600,
+      "fallbackDeadline": 1803313800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270222,
+      "closeTs": 1803330000,
+      "openTs": 1803393000,
+      "fallbackDeadline": 1803400200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270223,
+      "closeTs": 1803416400,
+      "openTs": 1803479400,
+      "fallbackDeadline": 1803486600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270224,
+      "closeTs": 1803502800,
+      "openTs": 1803565800,
+      "fallbackDeadline": 1803573000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270225,
+      "closeTs": 1803589200,
+      "openTs": 1803652200,
+      "fallbackDeadline": 1803659400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270226,
+      "closeTs": 1803675600,
+      "openTs": 1803911400,
+      "fallbackDeadline": 1803918600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270301,
+      "closeTs": 1803934800,
+      "openTs": 1803997800,
+      "fallbackDeadline": 1804005000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270302,
+      "closeTs": 1804021200,
+      "openTs": 1804084200,
+      "fallbackDeadline": 1804091400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270303,
+      "closeTs": 1804107600,
+      "openTs": 1804170600,
+      "fallbackDeadline": 1804177800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270304,
+      "closeTs": 1804194000,
+      "openTs": 1804257000,
+      "fallbackDeadline": 1804264200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270305,
+      "closeTs": 1804280400,
+      "openTs": 1804516200,
+      "fallbackDeadline": 1804523400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270308,
+      "closeTs": 1804539600,
+      "openTs": 1804602600,
+      "fallbackDeadline": 1804609800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270309,
+      "closeTs": 1804626000,
+      "openTs": 1804689000,
+      "fallbackDeadline": 1804696200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270310,
+      "closeTs": 1804712400,
+      "openTs": 1804775400,
+      "fallbackDeadline": 1804782600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270311,
+      "closeTs": 1804798800,
+      "openTs": 1804861800,
+      "fallbackDeadline": 1804869000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270312,
+      "closeTs": 1804885200,
+      "openTs": 1805117400,
+      "fallbackDeadline": 1805124600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270315,
+      "closeTs": 1805140800,
+      "openTs": 1805203800,
+      "fallbackDeadline": 1805211000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270316,
+      "closeTs": 1805227200,
+      "openTs": 1805290200,
+      "fallbackDeadline": 1805297400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270317,
+      "closeTs": 1805313600,
+      "openTs": 1805376600,
+      "fallbackDeadline": 1805383800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270318,
+      "closeTs": 1805400000,
+      "openTs": 1805463000,
+      "fallbackDeadline": 1805470200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270319,
+      "closeTs": 1805486400,
+      "openTs": 1805722200,
+      "fallbackDeadline": 1805729400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270322,
+      "closeTs": 1805745600,
+      "openTs": 1805808600,
+      "fallbackDeadline": 1805815800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270323,
+      "closeTs": 1805832000,
+      "openTs": 1805895000,
+      "fallbackDeadline": 1805902200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270324,
+      "closeTs": 1805918400,
+      "openTs": 1805981400,
+      "fallbackDeadline": 1805988600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270325,
+      "closeTs": 1806004800,
+      "openTs": 1806327000,
+      "fallbackDeadline": 1806334200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270329,
+      "closeTs": 1806350400,
+      "openTs": 1806413400,
+      "fallbackDeadline": 1806420600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270330,
+      "closeTs": 1806436800,
+      "openTs": 1806499800,
+      "fallbackDeadline": 1806507000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270331,
+      "closeTs": 1806523200,
+      "openTs": 1806586200,
+      "fallbackDeadline": 1806593400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270401,
+      "closeTs": 1806609600,
+      "openTs": 1806672600,
+      "fallbackDeadline": 1806679800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270402,
+      "closeTs": 1806696000,
+      "openTs": 1806931800,
+      "fallbackDeadline": 1806939000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270405,
+      "closeTs": 1806955200,
+      "openTs": 1807018200,
+      "fallbackDeadline": 1807025400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270406,
+      "closeTs": 1807041600,
+      "openTs": 1807104600,
+      "fallbackDeadline": 1807111800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270407,
+      "closeTs": 1807128000,
+      "openTs": 1807191000,
+      "fallbackDeadline": 1807198200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270408,
+      "closeTs": 1807214400,
+      "openTs": 1807277400,
+      "fallbackDeadline": 1807284600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270409,
+      "closeTs": 1807300800,
+      "openTs": 1807536600,
+      "fallbackDeadline": 1807543800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270412,
+      "closeTs": 1807560000,
+      "openTs": 1807623000,
+      "fallbackDeadline": 1807630200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270413,
+      "closeTs": 1807646400,
+      "openTs": 1807709400,
+      "fallbackDeadline": 1807716600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270414,
+      "closeTs": 1807732800,
+      "openTs": 1807795800,
+      "fallbackDeadline": 1807803000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270415,
+      "closeTs": 1807819200,
+      "openTs": 1807882200,
+      "fallbackDeadline": 1807889400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270416,
+      "closeTs": 1807905600,
+      "openTs": 1808141400,
+      "fallbackDeadline": 1808148600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270419,
+      "closeTs": 1808164800,
+      "openTs": 1808227800,
+      "fallbackDeadline": 1808235000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270420,
+      "closeTs": 1808251200,
+      "openTs": 1808314200,
+      "fallbackDeadline": 1808321400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270421,
+      "closeTs": 1808337600,
+      "openTs": 1808400600,
+      "fallbackDeadline": 1808407800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270422,
+      "closeTs": 1808424000,
+      "openTs": 1808487000,
+      "fallbackDeadline": 1808494200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270423,
+      "closeTs": 1808510400,
+      "openTs": 1808746200,
+      "fallbackDeadline": 1808753400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270426,
+      "closeTs": 1808769600,
+      "openTs": 1808832600,
+      "fallbackDeadline": 1808839800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270427,
+      "closeTs": 1808856000,
+      "openTs": 1808919000,
+      "fallbackDeadline": 1808926200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270428,
+      "closeTs": 1808942400,
+      "openTs": 1809005400,
+      "fallbackDeadline": 1809012600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270429,
+      "closeTs": 1809028800,
+      "openTs": 1809091800,
+      "fallbackDeadline": 1809099000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270430,
+      "closeTs": 1809115200,
+      "openTs": 1809351000,
+      "fallbackDeadline": 1809358200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270503,
+      "closeTs": 1809374400,
+      "openTs": 1809437400,
+      "fallbackDeadline": 1809444600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270504,
+      "closeTs": 1809460800,
+      "openTs": 1809523800,
+      "fallbackDeadline": 1809531000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270505,
+      "closeTs": 1809547200,
+      "openTs": 1809610200,
+      "fallbackDeadline": 1809617400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270506,
+      "closeTs": 1809633600,
+      "openTs": 1809696600,
+      "fallbackDeadline": 1809703800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270507,
+      "closeTs": 1809720000,
+      "openTs": 1809955800,
+      "fallbackDeadline": 1809963000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270510,
+      "closeTs": 1809979200,
+      "openTs": 1810042200,
+      "fallbackDeadline": 1810049400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270511,
+      "closeTs": 1810065600,
+      "openTs": 1810128600,
+      "fallbackDeadline": 1810135800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270512,
+      "closeTs": 1810152000,
+      "openTs": 1810215000,
+      "fallbackDeadline": 1810222200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270513,
+      "closeTs": 1810238400,
+      "openTs": 1810301400,
+      "fallbackDeadline": 1810308600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270514,
+      "closeTs": 1810324800,
+      "openTs": 1810560600,
+      "fallbackDeadline": 1810567800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270517,
+      "closeTs": 1810584000,
+      "openTs": 1810647000,
+      "fallbackDeadline": 1810654200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270518,
+      "closeTs": 1810670400,
+      "openTs": 1810733400,
+      "fallbackDeadline": 1810740600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270519,
+      "closeTs": 1810756800,
+      "openTs": 1810819800,
+      "fallbackDeadline": 1810827000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270520,
+      "closeTs": 1810843200,
+      "openTs": 1810906200,
+      "fallbackDeadline": 1810913400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270521,
+      "closeTs": 1810929600,
+      "openTs": 1811165400,
+      "fallbackDeadline": 1811172600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270524,
+      "closeTs": 1811188800,
+      "openTs": 1811251800,
+      "fallbackDeadline": 1811259000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270525,
+      "closeTs": 1811275200,
+      "openTs": 1811338200,
+      "fallbackDeadline": 1811345400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270526,
+      "closeTs": 1811361600,
+      "openTs": 1811424600,
+      "fallbackDeadline": 1811431800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270527,
+      "closeTs": 1811448000,
+      "openTs": 1811511000,
+      "fallbackDeadline": 1811518200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270528,
+      "closeTs": 1811534400,
+      "openTs": 1811856600,
+      "fallbackDeadline": 1811863800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270601,
+      "closeTs": 1811880000,
+      "openTs": 1811943000,
+      "fallbackDeadline": 1811950200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270602,
+      "closeTs": 1811966400,
+      "openTs": 1812029400,
+      "fallbackDeadline": 1812036600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270603,
+      "closeTs": 1812052800,
+      "openTs": 1812115800,
+      "fallbackDeadline": 1812123000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270604,
+      "closeTs": 1812139200,
+      "openTs": 1812375000,
+      "fallbackDeadline": 1812382200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270607,
+      "closeTs": 1812398400,
+      "openTs": 1812461400,
+      "fallbackDeadline": 1812468600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270608,
+      "closeTs": 1812484800,
+      "openTs": 1812547800,
+      "fallbackDeadline": 1812555000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270609,
+      "closeTs": 1812571200,
+      "openTs": 1812634200,
+      "fallbackDeadline": 1812641400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270610,
+      "closeTs": 1812657600,
+      "openTs": 1812720600,
+      "fallbackDeadline": 1812727800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270611,
+      "closeTs": 1812744000,
+      "openTs": 1812979800,
+      "fallbackDeadline": 1812987000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270614,
+      "closeTs": 1813003200,
+      "openTs": 1813066200,
+      "fallbackDeadline": 1813073400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270615,
+      "closeTs": 1813089600,
+      "openTs": 1813152600,
+      "fallbackDeadline": 1813159800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270616,
+      "closeTs": 1813176000,
+      "openTs": 1813239000,
+      "fallbackDeadline": 1813246200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270617,
+      "closeTs": 1813262400,
+      "openTs": 1813584600,
+      "fallbackDeadline": 1813591800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270621,
+      "closeTs": 1813608000,
+      "openTs": 1813671000,
+      "fallbackDeadline": 1813678200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270622,
+      "closeTs": 1813694400,
+      "openTs": 1813757400,
+      "fallbackDeadline": 1813764600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270623,
+      "closeTs": 1813780800,
+      "openTs": 1813843800,
+      "fallbackDeadline": 1813851000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270624,
+      "closeTs": 1813867200,
+      "openTs": 1813930200,
+      "fallbackDeadline": 1813937400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270625,
+      "closeTs": 1813953600,
+      "openTs": 1814189400,
+      "fallbackDeadline": 1814196600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270628,
+      "closeTs": 1814212800,
+      "openTs": 1814275800,
+      "fallbackDeadline": 1814283000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270629,
+      "closeTs": 1814299200,
+      "openTs": 1814362200,
+      "fallbackDeadline": 1814369400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270630,
+      "closeTs": 1814385600,
+      "openTs": 1814448600,
+      "fallbackDeadline": 1814455800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270701,
+      "closeTs": 1814472000,
+      "openTs": 1814535000,
+      "fallbackDeadline": 1814542200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270702,
+      "closeTs": 1814558400,
+      "openTs": 1814880600,
+      "fallbackDeadline": 1814887800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270706,
+      "closeTs": 1814904000,
+      "openTs": 1814967000,
+      "fallbackDeadline": 1814974200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270707,
+      "closeTs": 1814990400,
+      "openTs": 1815053400,
+      "fallbackDeadline": 1815060600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270708,
+      "closeTs": 1815076800,
+      "openTs": 1815139800,
+      "fallbackDeadline": 1815147000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270709,
+      "closeTs": 1815163200,
+      "openTs": 1815399000,
+      "fallbackDeadline": 1815406200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270712,
+      "closeTs": 1815422400,
+      "openTs": 1815485400,
+      "fallbackDeadline": 1815492600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270713,
+      "closeTs": 1815508800,
+      "openTs": 1815571800,
+      "fallbackDeadline": 1815579000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270714,
+      "closeTs": 1815595200,
+      "openTs": 1815658200,
+      "fallbackDeadline": 1815665400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270715,
+      "closeTs": 1815681600,
+      "openTs": 1815744600,
+      "fallbackDeadline": 1815751800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270716,
+      "closeTs": 1815768000,
+      "openTs": 1816003800,
+      "fallbackDeadline": 1816011000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270719,
+      "closeTs": 1816027200,
+      "openTs": 1816090200,
+      "fallbackDeadline": 1816097400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270720,
+      "closeTs": 1816113600,
+      "openTs": 1816176600,
+      "fallbackDeadline": 1816183800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270721,
+      "closeTs": 1816200000,
+      "openTs": 1816263000,
+      "fallbackDeadline": 1816270200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270722,
+      "closeTs": 1816286400,
+      "openTs": 1816349400,
+      "fallbackDeadline": 1816356600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270723,
+      "closeTs": 1816372800,
+      "openTs": 1816608600,
+      "fallbackDeadline": 1816615800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270726,
+      "closeTs": 1816632000,
+      "openTs": 1816695000,
+      "fallbackDeadline": 1816702200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270727,
+      "closeTs": 1816718400,
+      "openTs": 1816781400,
+      "fallbackDeadline": 1816788600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270728,
+      "closeTs": 1816804800,
+      "openTs": 1816867800,
+      "fallbackDeadline": 1816875000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270729,
+      "closeTs": 1816891200,
+      "openTs": 1816954200,
+      "fallbackDeadline": 1816961400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270730,
+      "closeTs": 1816977600,
+      "openTs": 1817213400,
+      "fallbackDeadline": 1817220600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270802,
+      "closeTs": 1817236800,
+      "openTs": 1817299800,
+      "fallbackDeadline": 1817307000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270803,
+      "closeTs": 1817323200,
+      "openTs": 1817386200,
+      "fallbackDeadline": 1817393400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270804,
+      "closeTs": 1817409600,
+      "openTs": 1817472600,
+      "fallbackDeadline": 1817479800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270805,
+      "closeTs": 1817496000,
+      "openTs": 1817559000,
+      "fallbackDeadline": 1817566200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270806,
+      "closeTs": 1817582400,
+      "openTs": 1817818200,
+      "fallbackDeadline": 1817825400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270809,
+      "closeTs": 1817841600,
+      "openTs": 1817904600,
+      "fallbackDeadline": 1817911800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270810,
+      "closeTs": 1817928000,
+      "openTs": 1817991000,
+      "fallbackDeadline": 1817998200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270811,
+      "closeTs": 1818014400,
+      "openTs": 1818077400,
+      "fallbackDeadline": 1818084600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270812,
+      "closeTs": 1818100800,
+      "openTs": 1818163800,
+      "fallbackDeadline": 1818171000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270813,
+      "closeTs": 1818187200,
+      "openTs": 1818423000,
+      "fallbackDeadline": 1818430200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270816,
+      "closeTs": 1818446400,
+      "openTs": 1818509400,
+      "fallbackDeadline": 1818516600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270817,
+      "closeTs": 1818532800,
+      "openTs": 1818595800,
+      "fallbackDeadline": 1818603000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270818,
+      "closeTs": 1818619200,
+      "openTs": 1818682200,
+      "fallbackDeadline": 1818689400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270819,
+      "closeTs": 1818705600,
+      "openTs": 1818768600,
+      "fallbackDeadline": 1818775800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270820,
+      "closeTs": 1818792000,
+      "openTs": 1819027800,
+      "fallbackDeadline": 1819035000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270823,
+      "closeTs": 1819051200,
+      "openTs": 1819114200,
+      "fallbackDeadline": 1819121400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270824,
+      "closeTs": 1819137600,
+      "openTs": 1819200600,
+      "fallbackDeadline": 1819207800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270825,
+      "closeTs": 1819224000,
+      "openTs": 1819287000,
+      "fallbackDeadline": 1819294200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270826,
+      "closeTs": 1819310400,
+      "openTs": 1819373400,
+      "fallbackDeadline": 1819380600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270827,
+      "closeTs": 1819396800,
+      "openTs": 1819632600,
+      "fallbackDeadline": 1819639800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270830,
+      "closeTs": 1819656000,
+      "openTs": 1819719000,
+      "fallbackDeadline": 1819726200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270831,
+      "closeTs": 1819742400,
+      "openTs": 1819805400,
+      "fallbackDeadline": 1819812600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270901,
+      "closeTs": 1819828800,
+      "openTs": 1819891800,
+      "fallbackDeadline": 1819899000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270902,
+      "closeTs": 1819915200,
+      "openTs": 1819978200,
+      "fallbackDeadline": 1819985400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270903,
+      "closeTs": 1820001600,
+      "openTs": 1820323800,
+      "fallbackDeadline": 1820331000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270907,
+      "closeTs": 1820347200,
+      "openTs": 1820410200,
+      "fallbackDeadline": 1820417400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270908,
+      "closeTs": 1820433600,
+      "openTs": 1820496600,
+      "fallbackDeadline": 1820503800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270909,
+      "closeTs": 1820520000,
+      "openTs": 1820583000,
+      "fallbackDeadline": 1820590200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270910,
+      "closeTs": 1820606400,
+      "openTs": 1820842200,
+      "fallbackDeadline": 1820849400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270913,
+      "closeTs": 1820865600,
+      "openTs": 1820928600,
+      "fallbackDeadline": 1820935800,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270914,
+      "closeTs": 1820952000,
+      "openTs": 1821015000,
+      "fallbackDeadline": 1821022200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270915,
+      "closeTs": 1821038400,
+      "openTs": 1821101400,
+      "fallbackDeadline": 1821108600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270916,
+      "closeTs": 1821124800,
+      "openTs": 1821187800,
+      "fallbackDeadline": 1821195000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270917,
+      "closeTs": 1821211200,
+      "openTs": 1821447000,
+      "fallbackDeadline": 1821454200,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270920,
+      "closeTs": 1821470400,
+      "openTs": 1821533400,
+      "fallbackDeadline": 1821540600,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270921,
+      "closeTs": 1821556800,
+      "openTs": 1821619800,
+      "fallbackDeadline": 1821627000,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270922,
+      "closeTs": 1821643200,
+      "openTs": 1821706200,
+      "fallbackDeadline": 1821713400,
+      "printBandSecs": 1800,
+      "early": false
+    },
+    {
+      "id": 20270923,
+      "closeTs": 1821729600,
+      "openTs": 1821792600,
+      "fallbackDeadline": 1821799800,
+      "printBandSecs": 1800,
+      "early": false
+    }
+  ]
+}
