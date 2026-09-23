@@ -43,20 +43,26 @@ contract RegistryTest is Fixture {
 
     function test_adjDefaultAndPreClose() public {
         assertEq(corp.adjOf(TICKER, SESSION), ClosureMath.WAD);
-        corp.setAdj(TICKER, SESSION, 5e17);
+        _applyAdj(5e17);
         assertEq(corp.adjOf(TICKER, SESSION), 5e17);
         vm.warp(block.timestamp + 1 days);
         vm.expectRevert(CorporateActionRegistry.SessionClosed.selector);
-        corp.setAdj(TICKER, SESSION, ClosureMath.WAD);
+        corp.scheduleAdj(TICKER, SESSION, ClosureMath.WAD);
     }
 
     function test_adjRejectsZero() public {
         vm.expectRevert(CorporateActionRegistry.InvalidAdj.selector);
-        corp.setAdj(TICKER, SESSION, 0);
+        corp.scheduleAdj(TICKER, SESSION, 0);
+    }
+
+    function test_adjCannotExecuteBeforeDelay() public {
+        corp.scheduleAdj(TICKER, SESSION, 5e17);
+        vm.expectRevert(CorporateActionRegistry.NotReady.selector);
+        corp.executeAdj(TICKER, SESSION);
     }
 
     function test_adjChangesSplit() public {
-        corp.setAdj(TICKER, SESSION, 5e17);
+        _applyAdj(5e17);
         (bytes32 id,,) = _createDefault();
         _fund(address(this), 1_000_000);
         vault.mintPair(id, 1_000_000, address(this));
@@ -74,5 +80,13 @@ contract RegistryTest is Fixture {
         (uint256 price, bool ok) = oracle.printOf(TICKER, SESSION, IPrintOracle.PrintKind.Close);
         assertEq(price, PRICE);
         assertTrue(ok);
+    }
+
+    function _applyAdj(
+        uint256 adj
+    ) internal {
+        corp.scheduleAdj(TICKER, SESSION, adj);
+        vm.warp(block.timestamp + 1);
+        corp.executeAdj(TICKER, SESSION);
     }
 }
