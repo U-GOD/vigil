@@ -4,6 +4,7 @@ To: Kuru listings / protocol
 From: Vigil
 Network: Monad testnet (chain 10143)
 Date: 2026-09-21
+Status: drafted, not sent
 
 ## Ask
 
