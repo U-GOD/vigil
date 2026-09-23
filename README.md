@@ -301,6 +301,8 @@ The TypeScript payoff used by agents and keepers is tested against the Solidity 
 
 Issuance and settlement contracts are implemented. Production prints come from `PrintOracle`: a reporter quorum, a deviation bound, and a bonded dispute that can only void a print. `PythPrintReporter` pulls an Equity.US Pyth update and submits it when the publish time sits in the session's print band. `SessionRegistry` holds both compressed `VIGIL_SYNTH` windows and the NYSE cash calendar; Nasdaq cash equities use those same dates. Corporate-action adjustments and delist flags are timelocked and cannot be applied after their deadline. `InjectedPrintOracle` is a test helper and is not on the deploy path. Testnet collateral is `TestCollateral` (VUSD), a 6-decimal stand-in, not a native stablecoin listing.
 
+`KuruListingAdapter` records a listing and binds an order book after SpotRouter and AccountCore both verify it and the book parameters match the requested spec, including passive spread through `computeAddress`. Trading stays closed until that bind. SDK order encoders call `@toxicflow-labs/ts-sdk`, so a plugin and a keeper share one calldata path. The slot manager places only into a free slot of the 62 and cancels with the current order id. The Kuru listing request is drafted and unsent. No Closure Note book is registered. Order-path checks run against the live MON/USDC book.
+
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
