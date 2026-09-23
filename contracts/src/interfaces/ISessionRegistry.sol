@@ -18,4 +18,12 @@ interface ISessionRegistry {
     function exists(
         uint64 sessionId
     ) external view returns (bool);
+
+    function successorOf(
+        uint64 sessionId
+    ) external view returns (uint64);
+
+    function noAuction(
+        uint64 sessionId
+    ) external view returns (bool);
 }
