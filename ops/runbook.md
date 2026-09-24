@@ -135,6 +135,18 @@ Write the adapter into `LISTING_ADAPTER` and `packages/sdk/src/deployments/10143
 
 ## Phase 5
 
+```
+pnpm --filter @vigil/marketdata test
+pnpm --filter @vigil/riskmodel test
+pnpm --filter @vigil/marketdata build
+pnpm --filter @vigil/riskmodel build
+node packages/riskmodel/dist/cli.js NVDA
+```
+
+The calendar in `@vigil/marketdata` is the same builder that writes `contracts/script/data/xnys-sessions.json`. Quote adapters return `{ price, timestampMs, source }`. CoinGecko and Jupiter are off-hours anchors and refuse to act as official prints. Yahoo supplies daily bars. Polygon supplies official open/close when `POLYGON_IO_API_KEY` is set. Hermes `getQuote` throws on HTTP 401.
+
+`node packages/riskmodel/dist/cli.js NVDA` prints the 10% and 25% fair-value bands from the live anchor and the Yahoo regular close. If the two anchors differ by more than 50 bps it exits without a band. The output is a model for an unbound note, not a Kuru quote.
+
 ## Phase 6
 
 ## Phase 7
