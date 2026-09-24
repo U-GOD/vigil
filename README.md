@@ -303,6 +303,8 @@ Issuance and settlement contracts are implemented. Production prints come from `
 
 `KuruListingAdapter` records a listing and binds an order book after SpotRouter and AccountCore both verify it and the book parameters match the requested spec, including passive spread through `computeAddress`. Trading stays closed until that bind. SDK order encoders call `@toxicflow-labs/ts-sdk`, so a plugin and a keeper share one calldata path. The slot manager places only into a free slot of the 62 and cancels with the current order id. The Kuru listing request is drafted and unsent. No Closure Note book is registered. Order-path checks run against the live MON/USDC book.
 
+Shared prices and risk math live in `@vigil/marketdata` and `@vigil/riskmodel`. Every quote carries a source. The off-hours anchor is the cross-check of CoinGecko and Jupiter xStock prices. Official session bars come from Yahoo's chart, or from Polygon when `POLYGON_IO_API_KEY` is set. Hermes equity metadata is public; Hermes price updates still return 401 and the adapter refuses to invent a print. Fair value is the anchor passed through the same split as `ClosureMath`. The hedge size `(kUp + kDn) · V · coverage` is tested against that payoff. No Closure Note book is listed, so the fair-value command prints a model band and says so.
+
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
