@@ -305,6 +305,8 @@ Issuance and settlement contracts are implemented. Production prints come from `
 
 Shared prices and risk math live in `@vigil/marketdata` and `@vigil/riskmodel`. Every quote carries a source. The off-hours anchor is the cross-check of CoinGecko and Jupiter xStock prices. Official session bars come from Yahoo's chart, or from Polygon when `POLYGON_IO_API_KEY` is set. Hermes equity metadata is public; Hermes price updates still return 401 and the adapter refuses to invent a print. Fair value is the anchor passed through the same split as `ClosureMath`. The hedge size `(kUp + kDn) · V · coverage` is tested against that payoff. No Closure Note book is listed, so the fair-value command prints a model band and says so.
 
+Keepers decide in the open and submit only when a market is bound and `KEEPER_DRY_RUN=0`. Dry-run is the default. A kill switch (`KEEPER_KILL=1` or `KEEPER_KILL_FILE`) stops every action. The reporter submits a sourced print inside the session band. The spot keeper quotes a verified proxy book and cancels when the reference is stale. The anchor keeper halts on divergence and otherwise picks a take, a mint-and-sell, or a pair-burn. The underwriting vault is an ERC-4626 with a 2.5% per-ticker cap. A gap to the cap loses that ticker's allocation minus premium collected. The lifecycle keeper halts, finalizes, and falls back, and it alerts when a halt is still open past the fallback deadline.
+
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
