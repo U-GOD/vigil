@@ -149,6 +149,15 @@ The calendar in `@vigil/marketdata` is the same builder that writes `contracts/s
 
 ## Phase 6
 
+```
+pnpm --filter @vigil/keepers test
+forge test --root contracts --match-contract UnderwritingVaultTest
+```
+
+Dry-run is the default. `KEEPER_DRY_RUN=0` still refuses to broadcast until a keeper key and a bound Closure Note book exist. `KEEPER_KILL=1` or a file at `KEEPER_KILL_FILE` is the kill switch. State is `KEEPER_STATE`.
+
+`UnderwritingVault` is an ERC-4626 over the closure-vault collateral. The keeper mints pairs. Per-ticker exposure defaults to 2.5% of NAV. `worstCaseLoss` is allocation minus premium. The onchain exit (listed books, vault quotes, anchor fills, halt, finalize, redemption, hundreds of real fills) is not met: the deployer has 0 MON and Kuru has not registered a Closure Note book.
+
 ## Phase 7
 
 ## Phase 8
