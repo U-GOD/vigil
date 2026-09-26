@@ -160,6 +160,25 @@ Dry-run is the default. `KEEPER_DRY_RUN=0` still refuses to broadcast until a ke
 
 ## Phase 7
 
+Build the plugin, then install it into a signed-in Agent Wallet CLI. The browser extension is not that CLI.
+
+```
+pnpm --filter mm-plugin-vigil test
+pnpm --filter mm-plugin-vigil build
+mm doctor
+mm config set experimentalPlugins true
+mm config set experimentalAllowUnverifiedInstalls true
+mm plugins install "file:$PWD" --accept-permissions
+```
+
+Run the install from `plugin/mm-plugin-vigil` so the consent screen can read the manifest. Commands are `mm vigil markets`, `positions`, `quote`, `policy`, `cover`, `mint`, `underwrite`, `roll`, `settle`, and `watch`.
+
+`mm vigil watch --interval 60s --until session-end` is a foreground loop. Cron or Task Scheduler should call `mm vigil cover --once` and `mm vigil roll --if-pinned`. MFA still applies to each submission.
+
+The local policy file is a second layer on Agent Wallet policy, not a substitute. A TRADE delegate is opt-in on `mm vigil watch --delegate` and uses the permission bit read from AccountCore. It does not grant withdraw.
+
+The onchain exit is not met. PolicyAdapter is tested in Foundry and has no 10143 address. The deployer still has 0 MON. No Closure Note book is registered. `mm vigil cover` refuses to submit until both exist. Do not record a hash that was not returned by the wallet.
+
 ## Phase 8
 
 ## Phase 9
