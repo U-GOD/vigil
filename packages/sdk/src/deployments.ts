@@ -18,6 +18,7 @@ export type CoreAddresses = {
   factory: Address | null;
   collateral: Address | null;
   listing: Address | null;
+  policy: Address | null;
 };
 
 export type NetworkDeployments = {
@@ -60,6 +61,7 @@ function parseDeployments(raw: typeof raw10143): NetworkDeployments {
       factory: optionalAddress(raw.core.factory, "core.factory"),
       collateral: optionalAddress(raw.core.collateral, "core.collateral"),
       listing: optionalAddress(raw.core.listing, "core.listing"),
+      policy: optionalAddress(raw.core.policy, "core.policy"),
     },
   };
 }
