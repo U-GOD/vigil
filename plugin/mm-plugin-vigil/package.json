@@ -1,0 +1,102 @@
+{
+  "name": "mm-plugin-vigil",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Vigil closure-risk commands for the MetaMask Agent Wallet.",
+  "type": "module",
+  "keywords": ["oclif-plugin"],
+  "files": ["dist", "oclif.manifest.json", "skills"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && oclif manifest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@metamask/agent-wallet": "^6.2.0"
+  },
+  "dependencies": {
+    "@vigil/marketdata": "workspace:*",
+    "@vigil/riskmodel": "workspace:*",
+    "@vigil/sdk": "workspace:*",
+    "viem": "^2.38.0"
+  },
+  "devDependencies": {
+    "@metamask/agent-wallet": "^6.2.0",
+    "@types/node": "^24.0.0",
+    "oclif": "^4.23.14",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "oclif": {
+    "bin": "mm",
+    "commands": "./dist/commands",
+    "topicSeparator": " ",
+    "topics": {
+      "vigil": {
+        "description": "Scheduled closure-risk cover on Monad"
+      }
+    }
+  },
+  "mm": {
+    "schemaVersion": 1,
+    "minCliVersion": "^6.2.0",
+    "capabilities": [],
+    "commands": [
+      {
+        "id": "vigil:markets",
+        "capabilities": ["wallet-read"],
+        "dataAccess": ["prices", "network"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:positions",
+        "capabilities": ["wallet-read"],
+        "dataAccess": ["accounts", "balances"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:quote",
+        "capabilities": ["wallet-read"],
+        "dataAccess": ["prices"],
+        "targetChains": [10143]
+      },
+      { "id": "vigil:policy", "capabilities": [] },
+      {
+        "id": "vigil:cover",
+        "capabilities": ["wallet-read", "wallet-submit"],
+        "dataAccess": ["accounts", "balances", "prices", "fees"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:mint",
+        "capabilities": ["wallet-read", "wallet-submit"],
+        "dataAccess": ["balances", "fees"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:underwrite",
+        "capabilities": ["wallet-read", "wallet-submit"],
+        "dataAccess": ["accounts", "balances", "prices", "fees"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:roll",
+        "capabilities": ["wallet-read", "wallet-submit"],
+        "dataAccess": ["accounts", "balances", "prices", "fees"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:settle",
+        "capabilities": ["wallet-read", "wallet-submit"],
+        "dataAccess": ["accounts", "balances"],
+        "targetChains": [10143]
+      },
+      {
+        "id": "vigil:watch",
+        "capabilities": ["wallet-read", "wallet-submit"],
+        "dataAccess": ["accounts", "balances", "prices", "fees"],
+        "targetChains": [10143]
+      }
+    ]
+  }
+}
