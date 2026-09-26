@@ -1,10 +1,14 @@
 import type { Address } from "viem";
 import {
+  buildAuthorizeAccountSignerBySigRequest,
   buildAuthorizeAccountSignerRequest,
+  buildAuthorizeAccountSignerTypedData,
   buildApproveErc20Request,
   buildDepositRequest,
   buildWithdrawRequest,
+  type AuthorizeAccountSignerBySigParams,
   type AuthorizeAccountSignerParams,
+  type AuthorizeAccountSignerTypedDataParams,
   type DepositParams,
   type WithdrawParams,
 } from "@toxicflow-labs/ts-sdk/account";
@@ -36,9 +40,21 @@ export function approveAccountCoreRequest(params: {
   accountCore: Address;
   amount: bigint;
 }): RequestLike {
-  return buildApproveErc20Request({
+  return approveTokenRequest({
     token: params.token,
     spender: params.accountCore,
+    amount: params.amount,
+  });
+}
+
+export function approveTokenRequest(params: {
+  token: Address;
+  spender: Address;
+  amount: bigint;
+}): RequestLike {
+  return buildApproveErc20Request({
+    token: params.token,
+    spender: params.spender,
     amount: params.amount,
   });
 }
@@ -60,6 +76,41 @@ export function authorizeTradeSignerRequest(
 ): RequestLike {
   return buildAuthorizeAccountSignerRequest(params);
 }
+
+/** EIP-712 payload for a signer. The caller supplies the permission bit. */
+export function tradeSignerTypedData(params: AuthorizeAccountSignerTypedDataParams) {
+  return buildAuthorizeAccountSignerTypedData(params);
+}
+
+export function authorizeSignerBySigRequest(
+  params: AuthorizeAccountSignerBySigParams & { accountCore: Address },
+): RequestLike {
+  return buildAuthorizeAccountSignerBySigRequest(params);
+}
+
+export const accountPermissionAbi = [
+  {
+    type: "function",
+    name: "ACCOUNT_PERMISSION_TRADE",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [{ name: "", type: "uint32" }],
+  },
+  {
+    type: "function",
+    name: "ACCOUNT_PERMISSION_WITHDRAW",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [{ name: "", type: "uint32" }],
+  },
+  {
+    type: "function",
+    name: "accountSignerAuthorizationNonces",
+    stateMutability: "view",
+    inputs: [{ name: "account", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+] as const;
 
 export function userRegistryRequest(accountCore: Address, user: Address): RequestLike {
   return {
