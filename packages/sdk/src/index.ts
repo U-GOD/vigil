@@ -21,8 +21,12 @@ export {
 export { CN_BOOK_SPEC, MON_USDC_BOOK } from "./kuru/bookSpec.js";
 export {
   accountOnboardingCalls,
+  accountPermissionAbi,
   approveAccountCoreRequest,
+  approveTokenRequest,
+  authorizeSignerBySigRequest,
   authorizeTradeSignerRequest,
+  tradeSignerTypedData,
   balanceRequest,
   claimUsdcRequest,
   depositRequest,
@@ -32,6 +36,13 @@ export {
   withdrawRequest,
 } from "./kuru/account.js";
 export { encodeRequest, keeperCall, pluginCall } from "./kuru/encode.js";
+export {
+  buyProtectionRequest,
+  burnPairRequest,
+  mintPairRequest,
+  policyAdapterAbi,
+  redeemRequest,
+} from "./policy.js";
 export {
   assertTradable,
   batchRequest,
