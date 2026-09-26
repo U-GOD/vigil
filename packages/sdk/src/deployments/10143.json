@@ -17,6 +17,7 @@
     "vault": null,
     "factory": null,
     "collateral": null,
-    "listing": null
+    "listing": null,
+    "policy": null
   }
 }
