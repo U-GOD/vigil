@@ -1,0 +1,1279 @@
+{
+  "commands": {
+    "vigil:cover": {
+      "aliases": [],
+      "args": {
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "required": true
+        }
+      },
+      "description": "Size a closure hedge and submit it through the Agent Wallet. One shot.",
+      "examples": [
+        "<%= config.bin %> vigil cover NVDA --inventory 1000000000 --account 0x0000000000000000000000000000000000000001"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "inventory": {
+          "description": "Inventory value in 6-decimal collateral units",
+          "name": "inventory",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "account": {
+          "description": "Account that signs and receives notes",
+          "name": "account",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "coverage": {
+          "description": "Coverage in WAD. Omit for 1e18",
+          "name": "coverage",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "k": {
+          "description": "Cap in WAD. Omit for the tightest cap the local policy allows",
+          "name": "k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "fair-dn": {
+          "description": "DN fair value in WAD. Omit to read the live anchor",
+          "name": "fair-dn",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "fair-up": {
+          "description": "UP fair value in WAD",
+          "name": "fair-up",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "policy": {
+          "description": "Local risk policy file",
+          "name": "policy",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "once": {
+          "description": "Evaluate once. This command is already a single shot",
+          "name": "once",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:cover",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "cover.js"
+      ]
+    },
+    "vigil:markets": {
+      "aliases": [],
+      "args": {},
+      "description": "List closure sessions, deployment status, and whether a Closure Note book is bound.",
+      "examples": [
+        "<%= config.bin %> vigil markets"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "at": {
+          "description": "Unix seconds to evaluate the calendar. Omit for the current time",
+          "name": "at",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:markets",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "markets.js"
+      ]
+    },
+    "vigil:mint": {
+      "aliases": [],
+      "args": {
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "required": true
+        }
+      },
+      "description": "Mint or burn a Closure Note pair through PolicyAdapter.",
+      "examples": [
+        "<%= config.bin %> vigil mint NVDA --pairs 1000000 --account 0xABC --burn"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "pairs": {
+          "description": "Pair amount in 6-decimal note units",
+          "name": "pairs",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "account": {
+          "description": "Account that signs and receives notes",
+          "name": "account",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "k": {
+          "description": "Cap in WAD",
+          "name": "k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "burn": {
+          "description": "Burn a pair instead of minting",
+          "name": "burn",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "policy": {
+          "description": "Local risk policy file",
+          "name": "policy",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:mint",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "mint.js"
+      ]
+    },
+    "vigil:policy": {
+      "aliases": [],
+      "args": {},
+      "description": "Read or write the local risk policy. It does not replace Agent Wallet policy, signing, or MFA.",
+      "examples": [
+        "<%= config.bin %> vigil policy",
+        "<%= config.bin %> vigil policy --write --max-cost-bps 20"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "file": {
+          "description": "Local risk policy path. Defaults to ~/.vigil/policy.json or VIGIL_POLICY",
+          "name": "file",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "write": {
+          "description": "Write the supplied fields to the policy file",
+          "name": "write",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "max-cost-bps": {
+          "description": "Maximum premium over fair value, in basis points",
+          "name": "max-cost-bps",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-cap-wad": {
+          "description": "Tightest allowed cap, in WAD",
+          "name": "min-cap-wad",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "allowed-caps-wad": {
+          "description": "Comma-separated caps in WAD",
+          "name": "allowed-caps-wad",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-coverage-wad": {
+          "description": "Minimum coverage in WAD",
+          "name": "min-coverage-wad",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "per-ticker-notional": {
+          "description": "Per-ticker notional in collateral units",
+          "name": "per-ticker-notional",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "aggregate-notional": {
+          "description": "Aggregate notional in collateral units",
+          "name": "aggregate-notional",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-premium-bps": {
+          "description": "Minimum premium when selling, in basis points",
+          "name": "min-premium-bps",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "earnings-excluded": {
+          "description": "Comma-separated tickers to skip",
+          "name": "earnings-excluded",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:policy",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": false,
+      "requiresInit": false,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "policy.js"
+      ]
+    },
+    "vigil:positions": {
+      "aliases": [],
+      "args": {},
+      "description": "Coverage of a spot inventory by Closure Notes, and the worst case at the cap.",
+      "examples": [
+        "<%= config.bin %> vigil positions --inventory 1000000000 --notes 200000000"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "inventory": {
+          "description": "Inventory value in 6-decimal collateral units",
+          "name": "inventory",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "notes": {
+          "description": "DN note balance in 6-decimal units",
+          "name": "notes",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "k": {
+          "description": "Cap in WAD. Defaults to 10%",
+          "name": "k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:positions",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "positions.js"
+      ]
+    },
+    "vigil:quote": {
+      "aliases": [],
+      "args": {
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "required": true
+        }
+      },
+      "description": "Fair value and no-arb band from sourced prices. Read-only. Not a venue quote until a book is bound.",
+      "examples": [
+        "<%= config.bin %> vigil quote NVDA"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:quote",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "quote.js"
+      ]
+    },
+    "vigil:roll": {
+      "aliases": [],
+      "args": {
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "required": true
+        }
+      },
+      "description": "If protection is pinned at its cap, roll into the next wider cap the local policy allows.",
+      "examples": [
+        "<%= config.bin %> vigil roll NVDA --if-pinned --gap 70000000000000000 --current-k 100000000000000000"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "account": {
+          "description": "Account that signs",
+          "name": "account",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "inventory": {
+          "description": "Inventory value in 6-decimal collateral units",
+          "name": "inventory",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "gap": {
+          "description": "Absolute gap in WAD",
+          "name": "gap",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "current-k": {
+          "description": "Current cap in WAD",
+          "name": "current-k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "pairs": {
+          "description": "Pairs currently held",
+          "name": "pairs",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "fair-up": {
+          "description": "UP fair value in WAD",
+          "name": "fair-up",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "coverage": {
+          "description": "Coverage in WAD",
+          "name": "coverage",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "if-pinned": {
+          "description": "Roll only when the gap is outside the current cap",
+          "name": "if-pinned",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "policy": {
+          "description": "Local risk policy file",
+          "name": "policy",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:roll",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "roll.js"
+      ]
+    },
+    "vigil:settle": {
+      "aliases": [],
+      "args": {
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "required": true
+        }
+      },
+      "description": "Redeem finalized notes through PolicyAdapter and report hedge P&L against the unhedged book.",
+      "examples": [
+        "<%= config.bin %> vigil settle NVDA --account 0xABC --dn 200000000 --inventory 1000000000"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "account": {
+          "description": "Account that receives collateral",
+          "name": "account",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "up": {
+          "description": "UP notes to redeem",
+          "name": "up",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "dn": {
+          "description": "DN notes to redeem",
+          "name": "dn",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "inventory": {
+          "description": "Inventory the hedge covered, in collateral units",
+          "name": "inventory",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "premium": {
+          "description": "Premium paid, in collateral units",
+          "name": "premium",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "p-close": {
+          "description": "Official close in WAD",
+          "name": "p-close",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "p-open": {
+          "description": "Official open in WAD",
+          "name": "p-open",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "k": {
+          "description": "Cap in WAD",
+          "name": "k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:settle",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "settle.js"
+      ]
+    },
+    "vigil:underwrite": {
+      "aliases": [],
+      "args": {},
+      "description": "Sell closure protection across a basket, within per-ticker and aggregate budgets, skipping earnings.",
+      "examples": [
+        "<%= config.bin %> vigil underwrite --basket NVDA:1000000000 --account 0x0000000000000000000000000000000000000001"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "basket": {
+          "description": "Ticker:inventory pairs, comma-separated",
+          "name": "basket",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "account": {
+          "description": "Account that signs",
+          "name": "account",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "coverage": {
+          "description": "Coverage in WAD",
+          "name": "coverage",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "k": {
+          "description": "Cap in WAD",
+          "name": "k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "policy": {
+          "description": "Local risk policy file",
+          "name": "policy",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:underwrite",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "underwrite.js"
+      ]
+    },
+    "vigil:watch": {
+      "aliases": [],
+      "args": {
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "required": true
+        }
+      },
+      "description": "Foreground loop. Each action still goes through the Agent Wallet, including MFA.",
+      "examples": [
+        "<%= config.bin %> vigil watch NVDA --inventory 1000000000 --account 0xABC --interval 60s --until session-end"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ticker": {
+          "description": "Equity ticker",
+          "name": "ticker",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "inventory": {
+          "description": "Inventory value in 6-decimal collateral units",
+          "name": "inventory",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "account": {
+          "description": "Account that signs",
+          "name": "account",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "interval": {
+          "description": "Loop interval, such as 60s. Agent Wallet is not a daemon",
+          "name": "interval",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "until": {
+          "description": "Stop condition. session-end stops at the next open",
+          "name": "until",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "coverage": {
+          "description": "Coverage in WAD",
+          "name": "coverage",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "k": {
+          "description": "Cap in WAD",
+          "name": "k",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "policy": {
+          "description": "Local risk policy file",
+          "name": "policy",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "delegate": {
+          "description": "TRADE-only signer to authorize until the session open. Never WITHDRAW",
+          "name": "delegate",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "vigil:watch",
+      "pluginAlias": "mm-plugin-vigil",
+      "pluginName": "mm-plugin-vigil",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "vigil",
+        "watch.js"
+      ]
+    }
+  },
+  "version": "0.0.0"
+}
