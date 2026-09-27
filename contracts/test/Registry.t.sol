@@ -23,6 +23,22 @@ contract RegistryTest is Fixture {
         sessions.createSession(2, s);
     }
 
+    function test_emitsSessionStored() public {
+        ISessionRegistry.Session memory s = ISessionRegistry.Session({
+            exchange: keccak256("XNYS"),
+            closeTs: uint64(block.timestamp + 10),
+            openTs: uint64(block.timestamp + 20),
+            fallbackDeadline: uint64(block.timestamp + 30),
+            printBandSecs: 60,
+            active: true
+        });
+        vm.expectEmit(true, false, false, true, address(sessions));
+        emit SessionRegistry.SessionStored(
+            77, s.exchange, s.closeTs, s.openTs, s.fallbackDeadline, s.printBandSecs
+        );
+        sessions.createSession(77, s);
+    }
+
     function test_sessionExistsOnce() public {
         assertTrue(sessions.exists(SESSION));
         vm.expectRevert(SessionRegistry.SessionExists.selector);
