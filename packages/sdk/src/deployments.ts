@@ -19,6 +19,7 @@ export type CoreAddresses = {
   collateral: Address | null;
   listing: Address | null;
   policy: Address | null;
+  underwriting: Address | null;
 };
 
 export type NetworkDeployments = {
@@ -62,6 +63,7 @@ function parseDeployments(raw: typeof raw10143): NetworkDeployments {
       collateral: optionalAddress(raw.core.collateral, "core.collateral"),
       listing: optionalAddress(raw.core.listing, "core.listing"),
       policy: optionalAddress(raw.core.policy, "core.policy"),
+      underwriting: optionalAddress(raw.core.underwriting, "core.underwriting"),
     },
   };
 }
