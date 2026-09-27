@@ -319,6 +319,16 @@ Keepers decide in the open and submit only when a market is bound and `KEEPER_DR
 
 `mm vigil quote` and `mm vigil cover` size a hedge from the same fair-value math. Cover submits only through the Agent Wallet, and only when PolicyAdapter is deployed and the book is bound. Neither is true on testnet yet, so the command refuses instead of inventing a fill. `mm vigil policy` edits a local file and does not sign.
 
+```mermaid
+flowchart LR
+  chain[Monad testnet logs] --> index[HyperIndex]
+  index --> api[services/api]
+  api --> plugin[Agent Wallet plugin]
+  api --> keepers[Keepers]
+```
+
+`services/indexer` reduces `SessionRegistry`, factory, vault, settlement, oracle, listing, and underwriting events, plus Kuru `TradesPacked` and `BookUpdatesPacked` on books bound by `ListingBound`. Note balances come from `Transfer` on the note contracts. A market mid is the touch of the UP book, and only when both a bid and an ask are live. `extractSurface` runs on those mids. `services/api` serves `/markets`, `/sessions/:id`, `/positions/:address`, `/fairvalue/:marketId`, `/surface/:ticker`, and `/history/gaps/:ticker` from that snapshot. With the core addresses still empty, those routes return no rows and say the contracts are not deployed. Fair value needs an indexed close print and an `anchor` query; the API does not fetch a price. Realized gaps are indexed only after a session finalizes with both prints.
+
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
