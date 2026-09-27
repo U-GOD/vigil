@@ -181,6 +181,33 @@ The onchain exit is not met. PolicyAdapter is tested in Foundry and has no 10143
 
 ## Phase 8
 
+The indexer and the read API are local. A HyperIndex sync is not running.
+
+`services/indexer` is an Envio project for chain 10143. Addresses and the start block come from the environment, filled from `packages/sdk/src/deployments/10143.json` after a deploy:
+
+```
+VIGIL_START_BLOCK
+VIGIL_SESSIONS
+VIGIL_FACTORY
+VIGIL_LISTING
+VIGIL_VAULT
+VIGIL_SETTLEMENT
+VIGIL_ORACLE
+VIGIL_UNDERWRITING
+```
+
+Those values are empty today. Do not point the indexer at the zero address. Envio's documented HyperSync chain is Monad mainnet, chain 143. This config uses `https://testnet-rpc.monad.xyz` for chain 10143. `envio dev` needs Docker or Podman, and a hosted sync needs an Envio API key. Generate handlers with `pnpm dlx envio codegen` from `services/indexer` only after the addresses exist.
+
+Until then the API reduces `INDEXER_EVENTS`, a JSON array of logs. An empty log is the default.
+
+```
+pnpm --filter @vigil/api start
+```
+
+`PORT` defaults to 8787. Routes are `/markets`, `/sessions/:id`, `/positions/:address`, `/fairvalue/:marketId?anchor=`, `/surface/:ticker`, and `/history/gaps/:ticker`. Fair value applies `@vigil/riskmodel` to the indexed close and the anchor you pass. Adjustment stays 1 WAD because corporate-action events are not indexed. The surface is empty until two caps on the same ticker have two-sided UP books.
+
+Indexed note balances are checked against vault mint, burn, and redeem accounting in `services/indexer/test/reduce.test.ts`. A live `balanceOf` comparison refuses while the deployment addresses are null. That comparison is not evidence of an onchain reconciliation.
+
 ## Phase 9
 
 ## Phase 10
