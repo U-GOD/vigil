@@ -1,0 +1,84 @@
+type Session {
+  id: ID!
+  exchange: String!
+  closeTs: BigInt!
+  openTs: BigInt!
+  fallbackDeadline: BigInt!
+  printBandSecs: Int!
+  noAuction: Boolean!
+  successorId: BigInt
+  marketCount: Int!
+}
+
+type Market {
+  id: ID!
+  ticker: String!
+  tickerLabel: String!
+  sessionId: BigInt!
+  kUp: BigInt!
+  kDn: BigInt!
+  collateral: String!
+  noteUp: String!
+  noteDn: String!
+  bookUp: String
+  bookDn: String
+  state: String!
+  sUp: BigInt
+  fallbackSettle: Boolean
+  midUp: BigInt
+  bidUp: BigInt
+  askUp: BigInt
+  depthBid: BigInt!
+  depthAsk: BigInt!
+  impliedPremium: BigInt
+  underwritingPairs: BigInt!
+  collateralHeld: BigInt!
+  tradeCount: Int!
+  bookJson: String!
+  bookError: String
+}
+
+type Position {
+  id: ID!
+  account: String!
+  marketId: String!
+  up: BigInt!
+  dn: BigInt!
+}
+
+type Print {
+  id: ID!
+  ticker: String!
+  sessionId: BigInt!
+  kind: String!
+  price: BigInt
+  candidate: BigInt
+  finalized: Boolean!
+  voided: Boolean!
+}
+
+type Settlement {
+  id: ID!
+  marketId: String!
+  sUp: BigInt!
+  fallbackSettle: Boolean!
+  blockNumber: Int!
+}
+
+type RealizedGap {
+  id: ID!
+  ticker: String!
+  sessionId: BigInt!
+  gap: BigInt!
+}
+
+type SurfaceSnapshot {
+  id: ID!
+  ticker: String!
+  blockNumber: Int!
+  aboveJson: String!
+  belowJson: String!
+  asymmetryJson: String!
+  premium: BigInt!
+  reason: String
+}
