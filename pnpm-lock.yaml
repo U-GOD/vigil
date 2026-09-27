@@ -86,6 +86,56 @@ importers:
         specifier: ^3.2.4
         version: 3.2.7(@types/node@24.13.6)
 
+  services/api:
+    dependencies:
+      '@vigil/indexer':
+        specifier: workspace:*
+        version: link:../indexer
+      '@vigil/riskmodel':
+        specifier: workspace:*
+        version: link:../../packages/riskmodel
+      '@vigil/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      viem:
+        specifier: ^2.38.0
+        version: 2.56.8(typescript@5.9.3)
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.6
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.7(@types/node@24.13.6)
+
+  services/indexer:
+    dependencies:
+      '@toxicflow-labs/ts-sdk':
+        specifier: 0.1.1
+        version: 0.1.1(typescript@5.9.3)
+      '@vigil/riskmodel':
+        specifier: workspace:*
+        version: link:../../packages/riskmodel
+      '@vigil/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      viem:
+        specifier: ^2.38.0
+        version: 2.56.8(typescript@5.9.3)
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.6
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.7(@types/node@24.13.6)
+
   services/keepers:
     dependencies:
       '@vigil/riskmodel':
