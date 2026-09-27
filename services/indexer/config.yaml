@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: vigil
+description: Closure Note state on Monad testnet (chain 10143).
+chains:
+  - id: 10143
+    start_block: ${VIGIL_START_BLOCK}
+    rpc:
+      - url: https://testnet-rpc.monad.xyz
+        for: sync
+    contracts:
+      - name: SessionRegistry
+        address: ${VIGIL_SESSIONS}
+        events:
+          - event: "SessionStored(uint64 indexed sessionId, bytes32 exchange, uint64 closeTs, uint64 openTs, uint64 fallbackDeadline, uint32 printBandSecs)"
+          - event: "NoAuctionDeclared(uint64 indexed sessionId)"
+          - event: "SuccessorSet(uint64 indexed sessionId, uint64 successorId)"
+      - name: ClosureMarketFactory
+        address: ${VIGIL_FACTORY}
+        events:
+          - event: "MarketCreated(bytes32 indexed marketId, bytes32 ticker, uint64 sessionId, uint64 kUp, uint64 kDn, address collateral, address noteUp, address noteDn, address creator)"
+      - name: KuruListingAdapter
+        address: ${VIGIL_LISTING}
+        events:
+          - event: "ListingRequested(bytes32 indexed marketId, address up, address dn, address collateral, bytes32 specHash)"
+          - event: "ListingCancelled(bytes32 indexed marketId)"
+          - event: "ListingBound(bytes32 indexed marketId, address bookUp, address bookDn)"
+      - name: ClosureVault
+        address: ${VIGIL_VAULT}
+        events:
+          - event: "MarketRegistered(bytes32 indexed marketId, address noteUp, address noteDn, address collateral)"
+          - event: "Minted(bytes32 indexed marketId, address indexed to, uint256 pairs, uint256 paid, uint256 fee)"
+          - event: "Burned(bytes32 indexed marketId, address indexed from, uint256 pairs)"
+          - event: "Redeemed(bytes32 indexed marketId, address indexed to, uint256 upAmt, uint256 dnAmt, uint256 payout)"
+          - event: "DustSwept(bytes32 indexed marketId, uint256 amount)"
+      - name: SettlementEngine
+        address: ${VIGIL_SETTLEMENT}
+        events:
+          - event: "MarketRegistered(bytes32 indexed marketId, bytes32 ticker, uint64 sessionId, uint64 kUp, uint64 kDn)"
+          - event: "Halted(bytes32 indexed marketId)"
+          - event: "Finalized(bytes32 indexed marketId, uint256 sUp, bool fallbackSettle)"
+      - name: PrintOracle
+        address: ${VIGIL_ORACLE}
+        events:
+          - event: "Submitted(bytes32 indexed ticker, uint64 sessionId, uint8 kind, address reporter, uint256 price)"
+          - event: "QuorumReached(bytes32 indexed ticker, uint64 sessionId, uint8 kind, uint256 candidate, uint64 deadline)"
+          - event: "Disputed(bytes32 indexed ticker, uint64 sessionId, uint8 kind, address disputer)"
+          - event: "DisputeResolved(bytes32 indexed ticker, uint64 sessionId, uint8 kind, bool upheld)"
+          - event: "PrintFinalized(bytes32 indexed ticker, uint64 sessionId, uint8 kind, uint256 price)"
+      - name: UnderwritingVault
+        address: ${VIGIL_UNDERWRITING}
+        events:
+          - event: "Allocated(bytes32 indexed marketId, bytes32 indexed ticker, uint256 pairs, uint256 paid)"
+          - event: "PremiumRecorded(bytes32 indexed ticker, uint256 amount)"
+          - event: "KeeperSet(address keeper)"
+          - event: "ExcludedSet(bytes32 indexed ticker, bool excluded)"
+      - name: ClosureNote
+        events:
+          - event: "Transfer(address indexed from, address indexed to, uint256 value)"
+      - name: KuruOrderBook
+        events:
+          - event: "TradesPacked(uint40 indexed accountId, address indexed executor, bytes32 clientOrderId, uint24 effectiveTakerFeePps, address builder, uint24 builderFeePps, bytes packedTrades)"
+          - event: "BookUpdatesPacked(uint40 indexed accountId, address indexed executor, bytes32 clientOrderId, bytes packedUpdates)"
