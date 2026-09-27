@@ -13,6 +13,7 @@ describe("deployments", () => {
     expect(d.pyth).toBe("0x2880aB155794e7179c9eE2e38200202908C17B43");
     expect(d.core.factory).toBeNull();
     expect(d.core.policy).toBeNull();
+    expect(d.core.underwriting).toBeNull();
   });
 
   it("rejects an unknown chain", () => {
