@@ -19,6 +19,17 @@ contract SessionRegistry is ISessionRegistry, Ownable {
     mapping(uint64 => uint64) public successorOf;
     mapping(uint64 => bool) public noAuction;
 
+    event SessionStored(
+        uint64 indexed sessionId,
+        bytes32 exchange,
+        uint64 closeTs,
+        uint64 openTs,
+        uint64 fallbackDeadline,
+        uint32 printBandSecs
+    );
+    event NoAuctionDeclared(uint64 indexed sessionId);
+    event SuccessorSet(uint64 indexed sessionId, uint64 successorId);
+
     constructor(
         address owner_
     ) Ownable(owner_) {}
@@ -58,6 +69,7 @@ contract SessionRegistry is ISessionRegistry, Ownable {
         if (block.timestamp < session.openTs) revert TooEarly();
         if (noAuction[sessionId]) revert AlreadySet();
         noAuction[sessionId] = true;
+        emit NoAuctionDeclared(sessionId);
     }
 
     function sessionOf(
@@ -81,6 +93,14 @@ contract SessionRegistry is ISessionRegistry, Ownable {
         if (session.openTs >= session.fallbackDeadline) revert InvalidWindow();
         if (!session.active) revert InvalidWindow();
         _sessions[sessionId] = session;
+        emit SessionStored(
+            sessionId,
+            session.exchange,
+            session.closeTs,
+            session.openTs,
+            session.fallbackDeadline,
+            session.printBandSecs
+        );
     }
 
     function _link(uint64 sessionId, uint64 nextId) internal {
@@ -90,5 +110,6 @@ contract SessionRegistry is ISessionRegistry, Ownable {
         if (successorOf[sessionId] != 0) revert AlreadySet();
         if (_sessions[nextId].openTs < _sessions[sessionId].openTs) revert InvalidWindow();
         successorOf[sessionId] = nextId;
+        emit SuccessorSet(sessionId, nextId);
     }
 }
