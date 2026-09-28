@@ -6,6 +6,12 @@ export {
   type KuruAddresses,
   type NetworkDeployments,
 } from "./deployments.js";
+export {
+  applyBroadcast,
+  type BroadcastFile,
+  type BroadcastReceipt,
+  type BroadcastTransaction,
+} from "./recordBroadcast.js";
 export { accountCoreAbi, orderBookAbi, spotRouterAbi } from "./abi.js";
 export {
   BPS_DENOMINATOR,
