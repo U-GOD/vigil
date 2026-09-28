@@ -1,4 +1,5 @@
 import { anchorDecision } from "./anchor.js";
+import { startSupervisor } from "./supervise.js";
 import { lifecycleAction } from "./lifecycle.js";
 import { pythReportIntent, reporterIntent } from "./reporter.js";
 import { bump, killed, loadState, logAction, saveState } from "./runtime.js";
@@ -110,7 +111,11 @@ export function demo(): void {
 }
 
 if (process.argv[1]?.endsWith("cli.js")) {
-  demo();
+  if (process.argv[2] === "supervise") {
+    await startSupervisor();
+  } else {
+    demo();
+  }
 }
 
 export { vaultQuote };
