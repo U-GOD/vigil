@@ -20,10 +20,12 @@ export type CoreAddresses = {
   listing: Address | null;
   policy: Address | null;
   underwriting: Address | null;
+  pythReporter: Address | null;
 };
 
 export type NetworkDeployments = {
   chainId: number;
+  startBlock: number | null;
   ping: Address | null;
   kuru: KuruAddresses;
   pyth: Address;
@@ -44,6 +46,7 @@ function asAddress(value: string, label: string): Address {
 function parseDeployments(raw: typeof raw10143): NetworkDeployments {
   return {
     chainId: raw.chainId,
+    startBlock: raw.startBlock,
     ping: raw.ping === null ? null : asAddress(raw.ping, "ping"),
     kuru: {
       accountCore: asAddress(raw.kuru.accountCore, "kuru.accountCore"),
@@ -64,6 +67,7 @@ function parseDeployments(raw: typeof raw10143): NetworkDeployments {
       listing: optionalAddress(raw.core.listing, "core.listing"),
       policy: optionalAddress(raw.core.policy, "core.policy"),
       underwriting: optionalAddress(raw.core.underwriting, "core.underwriting"),
+      pythReporter: optionalAddress(raw.core.pythReporter, "core.pythReporter"),
     },
   };
 }
