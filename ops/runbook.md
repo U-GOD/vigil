@@ -210,6 +210,56 @@ Indexed note balances are checked against vault mint, burn, and redeem accountin
 
 ## Phase 9
 
+The deploy script simulates. It has not been broadcast. The deployer `0xE83722D1173fC5fD56FDCF638a6919a6a635f3A8` has 0 MON. A dry-run of `DeployProtocol` estimated about 4.45 MON for the stack alone. Seeding and market creation cost more. Do not copy addresses out of `contracts/broadcast/**/dry-run`. Those files have no transaction hash.
+
+The deterministic deployer `0x4e59b44847b379578588920cA78FbF26c0B4956C` is already on chain 10143. Salts live in `contracts/script/Salts.sol`. The owner of the stack is the broadcasting key.
+
+Start, once that key holds MON:
+
+```
+forge script script/DeployProtocol.s.sol:DeployProtocol --root contracts --rpc-url https://testnet-rpc.monad.xyz --broadcast --verify
+pnpm --filter @vigil/sdk build
+node packages/sdk/scripts/recordDeploy.mjs contracts/broadcast/DeployProtocol.s.sol/10143/run-latest.json
+```
+
+`recordDeploy` writes `packages/sdk/src/deployments/10143.json` only when every required create has a successful receipt and a transaction hash. Verification uses the Monadscan API key in `MONADSCAN_API_KEY`. `--verify` is the Sourcify/Etherscan path Foundry supports for this chain. If verification fails, rerun `forge verify-contract` with the constructor args from the broadcast file. Do not mark a contract verified without an explorer page.
+
+Then, still as the owner:
+
+```
+forge script script/SetFeeds.s.sol:SetFeeds --root contracts --rpc-url https://testnet-rpc.monad.xyz --broadcast
+forge script script/SeedSessions.s.sol:SeedSessions --root contracts --rpc-url https://testnet-rpc.monad.xyz --broadcast
+forge script script/CreateMarkets.s.sol:CreateMarkets --root contracts --rpc-url https://testnet-rpc.monad.xyz --broadcast
+forge script script/FundUnderwriting.s.sol:FundUnderwriting --root contracts --rpc-url https://testnet-rpc.monad.xyz --broadcast
+```
+
+`SESSIONS`, `PYTH_REPORTER`, `FACTORY`, `POLICY`, `COLLATERAL`, `UNDERWRITING`, and `SESSION_ID` come from the recorded file. `FUND_AMOUNT` is testnet VUSD, minted by `TestCollateral`, not a production stablecoin. The first ladder is NVDA, AAPL, TSLA, MSFT, and AMZN, at 5/5, 10/10, 15/15, 25/25, 10/25, and 25/10. GOOG is in the feed file and is not in this batch. Only NVDA has a verified CoinGecko and Jupiter xStock id. The anchor keeper fails closed on the other names.
+
+Adding a ticker means a checked Equity.US session feed in `contracts/script/data/pyth-equities.json`, then `SetFeeds`, then a new row in `TickerSet`. Do not invent an xStock id.
+
+Adding a session is `SeedSessions` for the NYSE file, or one compressed window:
+
+```
+forge script script/SeedSynth.s.sol:SeedSynth --root contracts --rpc-url https://testnet-rpc.monad.xyz --broadcast
+```
+
+`SYNTH_SESSION_ID` stays in the 90_000_000 range so it does not collide with `yyyymmdd`. The default window is five minutes to the close, ten minutes to the open, and ten minutes of fallback. Run it on a 30-minute clock only after the stack is deployed. Nothing is looping that clock now.
+
+Keepers:
+
+```
+pnpm --filter @vigil/keepers build
+KEEPER_KILL=1 node services/keepers/dist/cli.js supervise
+```
+
+Clear `KEEPER_KILL` to let the loop run. It restarts `reporter`, `pyth`, `spot`, `anchor`, `vault`, and `lifecycle` every `KEEPER_INTERVAL_MS` (default 60 seconds). Five consecutive failed cycles stop the process. Alerts append to `KEEPER_ALERT_LOG`. Stop the process with `KEEPER_KILL=1` or a file at `KEEPER_KILL_FILE`. Dry-run is still the default. The CLI throws if dry-run is turned off, because no keeper key and no bound book exist. The supervisor does not submit those transactions.
+
+A stuck print sits in the dispute window (`30 minutes` on XNYS, `60` seconds on `VIGIL_SYNTH`). The council can `resolveDispute`. After the window, anyone can `finalizePrint` and then `SettlementEngine.finalize`. Past `fallbackDeadline`, `fallbackFinalize` freezes the neutral split. The lifecycle keeper alerts when a halt is still open at that deadline. It does not send the transaction.
+
+The next real weekend is session `20261002`: Friday 2 October 2026 close, Monday 5 October open. That window has not been run. Seven unattended days have not been run. Logs, when a supervisor is actually left up, are the JSON lines on stdout and `KEEPER_ALERT_LOG`.
+
+Demo sequence, in order, and only after the broadcast and a bound book: `SeedSynth` or the live `20261002` session, `CreateMarkets`, `mm vigil quote`, `mm vigil cover`, halt, finalize, redeem. Until those transactions exist, the commands refuse.
+
 ## Phase 10
 
 ## Phase 11
