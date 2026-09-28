@@ -1,5 +1,6 @@
 {
   "chainId": 10143,
+  "startBlock": null,
   "ping": null,
   "kuru": {
     "accountCore": "0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22",
@@ -19,6 +20,7 @@
     "collateral": null,
     "listing": null,
     "policy": null,
-    "underwriting": null
+    "underwriting": null,
+    "pythReporter": null
   }
 }
