@@ -14,6 +14,8 @@ describe("deployments", () => {
     expect(d.core.factory).toBeNull();
     expect(d.core.policy).toBeNull();
     expect(d.core.underwriting).toBeNull();
+    expect(d.core.pythReporter).toBeNull();
+    expect(d.startBlock).toBeNull();
   });
 
   it("rejects an unknown chain", () => {
