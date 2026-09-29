@@ -331,6 +331,8 @@ flowchart LR
 
 `DeployProtocol` is the CREATE2 path for the live stack: `PrintOracle`, the Pyth reporter, settlement, the vault, the factory, testnet VUSD, the listing adapter, `PolicyAdapter`, and the underwriting vault. `InjectedPrintOracle` stays off that path. A simulation against chain 10143 estimated about 4.45 MON and was not broadcast. The deployer balance is 0, so `packages/sdk/src/deployments/10143.json` still has no core addresses. A dry-run has no transaction hash and cannot be recorded. The first market batch is NVDA, AAPL, TSLA, MSFT, and AMZN, across four symmetric caps and two asymmetric caps. Only NVDA has a verified xStock anchor, so the anchor keeper fails closed on the other four. The next NYSE weekend window is session `20261002`. It has not been run.
 
+The closure-gap sample is in `research/README.md`, with the same figures copied to `research/kuru-bounty/02-demand-evidence.md`. It is 1,560 Friday-to-next-open rows from Yahoo daily chart bars, 52 weekends for each of 30 names, fetched on 2026-09-29. Those bars are not official auction prints. Earnings and macro regimes were not tagged, because no calendar was fetched. The pooled mean gap is 0.13%, the 5th percentile is -1.61%, and the 95th percentile is 2.21%. Settlement, premium, and spread figures on that page are models run through `splitUp`. No Closure Note has traded, and chain 10143 has no fills, volume, or vault P&L to report.
+
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
