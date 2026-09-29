@@ -262,6 +262,22 @@ Demo sequence, in order, and only after the broadcast and a bound book: `SeedSyn
 
 ## Phase 10
 
+The backtest is a Yahoo daily chart sample, not an official auction print. Polygon's same-day open and close is not the weekend gap and is not used. Earnings history was not available: chart `events=earn` returned nothing, and quoteSummary returned 401. No FOMC or CPI calendar was fetched, so weekends are not split by regime.
+
+Build the packages the scripts import, then fetch and report:
+
+```
+pnpm --filter @vigil/marketdata build
+pnpm --filter @vigil/sdk build
+pnpm --filter @vigil/riskmodel build
+node research/backtest/fetch.mjs
+node research/backtest/report.mjs
+```
+
+`fetch.mjs` writes `research/backtest/data/weekends.json` and `offhours.json`. It asks Yahoo for two years of daily bars on the names in `tickers.json`, keeps at most 52 Fridays per name, and drops a weekend when a split timestamp falls inside it. It also requests 14 days of CoinGecko history for `nvidia-xstock` only. `report.mjs` does not call the network. It writes `summary.json`, `out/gaps.svg`, `research/README.md`, and `research/kuru-bounty/02-demand-evidence.md` from the checked-in sample, using `splitUp` and `payoutDn`. Re-run the report after a fetch so the two pages cannot drift.
+
+Live session statistics are absent. `DeployProtocol` has not been broadcast, so there are no markets, fills, volume, settlement latency, mass-settlement gas, oracle disagreements, or vault P&L. The 4.45 MON figure is a simulation estimate.
+
 ## Phase 11
 
 ## Phase 12
