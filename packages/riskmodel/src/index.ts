@@ -6,5 +6,7 @@ export { extractSurface, impliedGap } from "./surface.js";
 export type { CapMid, Surface, TailPoint } from "./surface.js";
 export { gapFromPrints, summarizeGaps, tagEarnings } from "./gaps.js";
 export type { GapObservation, GapSummary, Regime } from "./gaps.js";
+export { LADDER, gapStats, percentileNearest, settleSample, spreadCompression } from "./backtest.js";
+export type { CapSpec, GapStats, PricePair, SettlementSummary, SpreadModel } from "./backtest.js";
 export { liveFairValue } from "./cli.js";
 export type { LiveBand } from "./cli.js";
