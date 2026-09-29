@@ -1,0 +1,32 @@
+{
+  "ticker": "NVDA",
+  "id": "nvidia-xstock",
+  "url": "https://api.coingecko.com/api/v3/coins/nvidia-xstock/market_chart/range?vs_currency=usd&from=1789431409&to=1790641009",
+  "note": "CoinGecko market_chart is a spot series for the one verified xStock id. It is not an official auction and it is not a 52-weekend history. Jupiter price v3 is a spot quote and was not called. The other 29 names have no verified xStock id, so no off-hours series was requested for them.",
+  "ok": true,
+  "status": 200,
+  "error": null,
+  "count": 336,
+  "points": [
+    {
+      "timestampMs": 1789434000000,
+      "usd": 212.7324150400558
+    },
+    {
+      "timestampMs": 1789437600000,
+      "usd": 212.7317263788993
+    },
+    {
+      "timestampMs": 1789441200000,
+      "usd": 212.9936311833642
+    },
+    {
+      "timestampMs": 1789444800000,
+      "usd": 212.7829396211509
+    },
+    {
+      "timestampMs": 1789448400000,
+      "usd": 212.42643648881068
+    }
+  ]
+}
