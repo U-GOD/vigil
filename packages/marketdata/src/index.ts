@@ -5,5 +5,7 @@ export { createPolygon } from "./polygon.js";
 export { createCoinGecko, XSTOCK_IDS } from "./coingecko.js";
 export { createJupiter, XSTOCK_MINTS } from "./jupiter.js";
 export { createYahoo } from "./yahoo.js";
+export { etParts, selectWeekends } from "./weekends.js";
+export type { DailyBar, WeekendPrint, WeekendSelection } from "./weekends.js";
 export { MarketDataError } from "./types.js";
 export type { MarketData, SessionPrints, SourcedPrice } from "./types.js";
