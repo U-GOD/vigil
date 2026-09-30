@@ -1,3 +1,4 @@
+import { pathToFileURL } from "node:url";
 import { createCoinGecko, createJupiter, createYahoo } from "@vigil/marketdata";
 import { noArbBand } from "./band.js";
 import { fairValueDn, fairValueUp } from "./fairValue.js";
@@ -82,7 +83,8 @@ export async function main(argv: string[]): Promise<void> {
   );
 }
 
-if (process.argv[1]?.endsWith("cli.js")) {
+const entry = process.argv[1];
+if (entry && import.meta.url === pathToFileURL(entry).href) {
   main(process.argv).catch((error: unknown) => {
     console.error(error instanceof Error ? error.message : error);
     process.exit(1);
