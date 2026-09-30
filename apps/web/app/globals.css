@@ -1,0 +1,145 @@
+:root {
+  --paper: #f3ead7;
+  --ink: #1d3557;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+a { color: var(--ink); }
+a:visited { color: var(--ink); }
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 4rem;
+}
+
+header {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.mark {
+  margin: 0;
+  font-variant: small-caps;
+  letter-spacing: 0.14em;
+  font-size: 1.7rem;
+}
+
+.dateline {
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+}
+
+nav { margin-top: 0.7rem; }
+
+nav a {
+  margin-right: 1.2rem;
+  text-decoration: none;
+}
+
+nav a[aria-current="page"] { text-decoration: underline; }
+
+.wallet {
+  float: right;
+  margin-top: -2.4rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9rem;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 1.8rem;
+  margin: 0 0 0.6rem;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin: 1.8rem 0 0.45rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--ink);
+}
+
+p { margin: 0.4rem 0 0.8rem; }
+
+form { margin: 0.6rem 0 1rem; }
+
+label { margin-right: 0.8rem; }
+
+input, button {
+  font: inherit;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 0.2rem 0.45rem;
+}
+
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+
+input:focus, button:focus, a:focus {
+  outline: 1px solid var(--ink);
+  outline-offset: 2px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.4rem 0 1rem;
+}
+
+th, td {
+  border-bottom: 1px solid var(--ink);
+  text-align: left;
+  padding: 0.35rem 0.5rem 0.35rem 0;
+  vertical-align: top;
+}
+
+th {
+  font-weight: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.num {
+  font-family: "Courier New", Courier, monospace;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  margin: 0.2rem 0 0.8rem;
+}
+
+dt { margin: 0; }
+dd { margin: 0; }
+
+footer {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--ink);
+  padding-top: 0.6rem;
+  font-size: 0.92rem;
+}
