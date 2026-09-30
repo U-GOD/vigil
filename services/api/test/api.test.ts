@@ -37,10 +37,18 @@ describe("api", () => {
   it("says the contracts are not deployed when the log is empty", () => {
     const result = dispatch("/markets", [], deployments);
     expect(result.status).toBe(200);
-    const body = result.body as { contractsDeployed: boolean; markets: unknown[]; reason: string };
+    const body = result.body as {
+      contractsDeployed: boolean;
+      markets: unknown[];
+      reason: string;
+      policy: string | null;
+      chainId: number;
+    };
     expect(body.contractsDeployed).toBe(false);
     expect(body.markets).toEqual([]);
     expect(body.reason).toMatch(/not deployed/);
+    expect(body.policy).toBeNull();
+    expect(body.chainId).toBe(10143);
   });
 
   it("answers the read routes from an event log in under 200ms", () => {
@@ -95,10 +103,17 @@ describe("api", () => {
     await once(server, "listening");
     const port = (server.address() as AddressInfo).port;
     const response = await fetch(`http://127.0.0.1:${port}/sessions/20260923`);
-    const body = (await response.json()) as { session: null; contractsDeployed: boolean };
+    const body = (await response.json()) as {
+      session: null;
+      contractsDeployed: boolean;
+      prints: unknown[];
+      settlements: unknown[];
+    };
     expect(response.status).toBe(200);
     expect(body.session).toBeNull();
     expect(body.contractsDeployed).toBe(false);
+    expect(body.prints).toEqual([]);
+    expect(body.settlements).toEqual([]);
     server.close();
   });
 });
