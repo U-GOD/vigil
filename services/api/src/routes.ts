@@ -51,7 +51,7 @@ export function dispatch(url: string, events: readonly LogEvent[], deployments: 
   const prepared = prepare(events, deployments);
   const parsed = new URL(url, "http://127.0.0.1");
   const parts = parsed.pathname.split("/").filter(Boolean);
-  const body = route(parts, parsed, prepared);
+  const body = route(parts, parsed, prepared, deployments);
   return {
     status: body.status,
     body: { ...asRecord(body.body), elapsedMs: Math.round(performance.now() - started) },
@@ -66,8 +66,11 @@ function route(
   parts: string[],
   url: URL,
   prepared: { snapshot: Snapshot; contractsDeployed: boolean; reason: string | null },
+  deployments: NetworkDeployments,
 ): ApiResult {
   const base = {
+    chainId: deployments.chainId,
+    policy: deployments.core.policy,
     contractsDeployed: prepared.contractsDeployed,
     reason: prepared.reason,
   };
@@ -75,12 +78,13 @@ function route(
     return { status: 200, body: { ...base, markets: prepared.snapshot.markets } };
   }
   if (parts[0] === "sessions" && parts[1]) {
-    const session = prepared.snapshot.sessions.find((row) => row.sessionId === parts[1]);
-    const markets = prepared.snapshot.markets.filter((row) => row.sessionId === parts[1]);
-    if (!session) {
-      return { status: 200, body: { ...base, session: null, markets: [] } };
-    }
-    return { status: 200, body: { ...base, session, markets } };
+    const sessionId = parts[1];
+    const session = prepared.snapshot.sessions.find((row) => row.sessionId === sessionId) ?? null;
+    const markets = prepared.snapshot.markets.filter((row) => row.sessionId === sessionId);
+    const ids = new Set(markets.map((row) => row.marketId));
+    const prints = prepared.snapshot.prints.filter((row) => row.sessionId === sessionId);
+    const settlements = prepared.snapshot.settlements.filter((row) => ids.has(row.marketId));
+    return { status: 200, body: { ...base, session, markets, prints, settlements } };
   }
   if (parts[0] === "positions" && parts[1]) {
     if (!isAddress(parts[1])) return { status: 400, body: { ...base, error: "invalid address" } };
