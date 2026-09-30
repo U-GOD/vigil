@@ -280,4 +280,13 @@ Live session statistics are absent. `DeployProtocol` has not been broadcast, so 
 
 ## Phase 11
 
+The terminal is `apps/web`. It is five views on the Phase 8 API: session board, market, position, settlement, and surface. The market view is the indexed Kuru touch (bid, ask, mid, depth). It is not a TradingView chart. TradingView has no Closure Note symbol, and a chart of the underlying would be a different market.
+
+```
+pnpm --filter @vigil/api start
+pnpm --filter @vigil/web dev
+```
+
+The web app proxies `/vigil-api` to `VIGIL_API_URL`, default `http://127.0.0.1:8787`. While the core addresses are null, the pages render the API's "not deployed" reason and leave mint, burn, and redeem disabled. A position's worst case is the paired collateral; a naked leg can redeem zero. Cost and coverage stay blank because the index does not store them.
+
 ## Phase 12
