@@ -13,6 +13,30 @@
       },
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./chain": {
+      "development": {
+        "types": "./src/chain.ts",
+        "import": "./src/chain.ts"
+      },
+      "types": "./dist/chain.d.ts",
+      "import": "./dist/chain.js"
+    },
+    "./math": {
+      "development": {
+        "types": "./src/closureMath.ts",
+        "import": "./src/closureMath.ts"
+      },
+      "types": "./dist/closureMath.d.ts",
+      "import": "./dist/closureMath.js"
+    },
+    "./policy": {
+      "development": {
+        "types": "./src/policy.ts",
+        "import": "./src/policy.ts"
+      },
+      "types": "./dist/policy.d.ts",
+      "import": "./dist/policy.js"
     }
   },
   "scripts": {
