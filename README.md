@@ -333,6 +333,8 @@ flowchart LR
 
 The closure-gap sample is in `research/README.md`, with the same figures copied to `research/kuru-bounty/02-demand-evidence.md`. It is 1,560 Friday-to-next-open rows from Yahoo daily chart bars, 52 weekends for each of 30 names, fetched on 2026-09-29. Those bars are not official auction prints. Earnings and macro regimes were not tagged, because no calendar was fetched. The pooled mean gap is 0.13%, the 5th percentile is -1.61%, and the 95th percentile is 2.21%. Settlement, premium, and spread figures on that page are models run through `splitUp`. No Closure Note has traded, and chain 10143 has no fills, volume, or vault P&L to report.
 
+`apps/web` is the terminal: session board, market, position, settlement, and surface. It reads `services/api` and does not keep a second copy of the books. The market page shows the Kuru touch from the index. It is not a price chart. Mint, burn, and redeem stay disabled while `PolicyAdapter` is null. With the core addresses empty, every view says the contracts are not deployed.
+
 Nothing in this document should be read as a live deployment, a listed market, or a promise of return. Published testnet numbers will point at a transaction, an oracle submission, or a named data source.
 
 ## License
