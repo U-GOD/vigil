@@ -3,11 +3,31 @@ import type { AddressInfo } from "node:net";
 import { stringToHex } from "viem";
 import { describe, expect, it } from "vitest";
 import type { LogEvent } from "@vigil/indexer";
-import { WAD, loadDeployments, marketId } from "@vigil/sdk";
+import { WAD, loadDeployments, marketId, type NetworkDeployments } from "@vigil/sdk";
 import { dispatch } from "../src/routes.js";
 import { createApiServer } from "../src/server.js";
 
 const deployments = loadDeployments(10143);
+
+function undeployed(): NetworkDeployments {
+  return {
+    ...deployments,
+    startBlock: null,
+    core: {
+      sessions: null,
+      corpActions: null,
+      oracle: null,
+      settlement: null,
+      vault: null,
+      factory: null,
+      collateral: null,
+      listing: null,
+      policy: null,
+      underwriting: null,
+      pythReporter: null,
+    },
+  };
+}
 const ticker = stringToHex("NVDA", { size: 32 });
 const collateral = "0x3333333333333333333333333333333333333333";
 const id = marketId(ticker, 20_260_923n, WAD / 10n, WAD / 10n, collateral);
@@ -35,7 +55,7 @@ function created(): LogEvent {
 
 describe("api", () => {
   it("says the contracts are not deployed when the log is empty", () => {
-    const result = dispatch("/markets", [], deployments);
+    const result = dispatch("/markets", [], undeployed());
     expect(result.status).toBe(200);
     const body = result.body as {
       contractsDeployed: boolean;
@@ -97,7 +117,7 @@ describe("api", () => {
     expect((positions.body as { positions: { up: string }[] }).positions[0]?.up).toBe("1000");
   });
 
-  it("serves the empty deployment over HTTP", async () => {
+  it("serves an empty log against the deployed address book", async () => {
     const server = createApiServer([]);
     server.listen(0, "127.0.0.1");
     await once(server, "listening");
@@ -111,7 +131,7 @@ describe("api", () => {
     };
     expect(response.status).toBe(200);
     expect(body.session).toBeNull();
-    expect(body.contractsDeployed).toBe(false);
+    expect(body.contractsDeployed).toBe(true);
     expect(body.prints).toEqual([]);
     expect(body.settlements).toEqual([]);
     server.close();
