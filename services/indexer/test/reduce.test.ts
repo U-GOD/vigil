@@ -237,10 +237,13 @@ describe("reducer", () => {
     expect(tight?.bookError).toBeTruthy();
   });
 
-  it("refuses a live chain comparison while the deployment addresses are empty", () => {
+  it("refuses a live chain comparison until an RPC is set", () => {
+    const previous = process.env.MONAD_RPC_URL;
+    delete process.env.MONAD_RPC_URL;
     expect(liveReconcileReady()).toEqual({
       ready: false,
-      reason: "Closure contracts are not deployed on chain 10143.",
+      reason: "MONAD_RPC_URL is not set.",
     });
+    if (previous !== undefined) process.env.MONAD_RPC_URL = previous;
   });
 });
