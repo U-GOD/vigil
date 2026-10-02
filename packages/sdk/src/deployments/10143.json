@@ -1,6 +1,6 @@
 {
   "chainId": 10143,
-  "startBlock": null,
+  "startBlock": 66840976,
   "ping": null,
   "kuru": {
     "accountCore": "0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22",
@@ -11,16 +11,16 @@
   },
   "pyth": "0x2880aB155794e7179c9eE2e38200202908C17B43",
   "core": {
-    "sessions": null,
-    "corpActions": null,
-    "oracle": null,
-    "settlement": null,
-    "vault": null,
-    "factory": null,
-    "collateral": null,
-    "listing": null,
-    "policy": null,
-    "underwriting": null,
-    "pythReporter": null
+    "sessions": "0x79BBf36CaFFA9DFca5220dF09c1Fa66D0d830C09",
+    "corpActions": "0x4163C73B7c874D242d40ee56AcBfE3F4E2113cf4",
+    "oracle": "0x9Ed90da3EaBcF9AD5a3D4dF916665F56363eFe2F",
+    "settlement": "0xEF3167EfDb42E97B7d5363E3578a4A54B1a450Da",
+    "vault": "0x77CD90Fda6048100038cAE3D2CbEE53dFFA69671",
+    "factory": "0x24CCaE43cD194Ba893608F1a4d445749D25b435f",
+    "collateral": "0xBE05889295edCaA4c279B2E2038210Ac11396f40",
+    "listing": "0xd8a9fC1104842F0b809E7Bade8Eb477704A3C610",
+    "policy": "0xCf590C99C9FA28e3a220cA9CfC9b05C969140310",
+    "underwriting": "0x0818aBb914bEac562122335B1081D5EDac29c03F",
+    "pythReporter": "0x0CAe4391bAaeCb149F1e42E16800f07802edF823"
   }
 }
