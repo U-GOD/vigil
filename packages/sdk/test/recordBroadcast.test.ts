@@ -34,11 +34,12 @@ function broadcast(): BroadcastFile {
 
 describe("applyBroadcast", () => {
   it("fills the address book only from a successful broadcast", () => {
-    const next = applyBroadcast(loadDeployments(10143), broadcast());
+    const current = loadDeployments(10143);
+    const next = applyBroadcast(current, broadcast());
     expect(next.core.sessions).toBe(getAddress(`0x${"1".padStart(40, "0")}`));
     expect(next.core.pythReporter).toBe(getAddress(`0x${"b".padStart(40, "0")}`));
     expect(next.startBlock).toBe(1_000);
-    expect(loadDeployments(10143).core.sessions).toBeNull();
+    expect(current.core.sessions).toBe(loadDeployments(10143).core.sessions);
   });
 
   it("refuses a partial or failed broadcast", () => {
@@ -54,5 +55,17 @@ describe("applyBroadcast", () => {
     const dry = broadcast();
     dry.transactions = dry.transactions?.map((tx) => ({ ...tx, hash: null }));
     expect(() => applyBroadcast(loadDeployments(10143), dry)).toThrow(/no transaction hash/);
+  });
+
+  it("accepts CREATE2 receipts whose contract address is empty", () => {
+    const file = broadcast();
+    file.receipts = file.receipts?.map((receipt, index) => ({
+      ...receipt,
+      contractAddress: null,
+      transactionHash: file.transactions?.[index]?.hash,
+    }));
+    const next = applyBroadcast(loadDeployments(10143), file);
+    expect(next.core.sessions).toBe(getAddress(`0x${"1".padStart(40, "0")}`));
+    expect(next.startBlock).toBe(1_000);
   });
 });
