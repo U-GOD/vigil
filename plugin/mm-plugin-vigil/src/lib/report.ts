@@ -15,7 +15,7 @@ export function marketsReport(nowSec: number): string {
       ? `PolicyAdapter ${deployments.core.policy}`
       : "PolicyAdapter is not deployed",
     deployments.core.listing
-      ? `listing ${deployments.core.listing}`
+      ? `KuruListingAdapter ${deployments.core.listing}. No Closure Note book is registered`
       : "No Closure Note book is registered",
   ];
   if (session) {
