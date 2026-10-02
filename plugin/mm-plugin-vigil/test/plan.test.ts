@@ -349,9 +349,11 @@ describe("trade delegate", () => {
 
 describe("reports", () => {
   it("does not invent a book or a position", () => {
-    expect(marketsReport(1_700_000_000)).toContain("PolicyAdapter is not deployed");
+    expect(marketsReport(1_700_000_000)).toContain(
+      "PolicyAdapter 0xCf590C99C9FA28e3a220cA9CfC9b05C969140310",
+    );
     expect(marketsReport(1_700_000_000)).toContain("No Closure Note book is registered");
-    expect(loadDeployments(10143).core.policy).toBeNull();
+    expect(loadDeployments(10143).core.policy).toBe("0xCf590C99C9FA28e3a220cA9CfC9b05C969140310");
     expect(
       positionsReport({ inventory: null, notes: null, kUp: k, kDn: k, onchain: false }),
     ).toContain("not computed");
