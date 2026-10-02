@@ -206,11 +206,11 @@ pnpm --filter @vigil/api start
 
 `PORT` defaults to 8787. Routes are `/markets`, `/sessions/:id`, `/positions/:address`, `/fairvalue/:marketId?anchor=`, `/surface/:ticker`, and `/history/gaps/:ticker`. Fair value applies `@vigil/riskmodel` to the indexed close and the anchor you pass. Adjustment stays 1 WAD because corporate-action events are not indexed. The surface is empty until two caps on the same ticker have two-sided UP books.
 
-Indexed note balances are checked against vault mint, burn, and redeem accounting in `services/indexer/test/reduce.test.ts`. A live `balanceOf` comparison refuses while the deployment addresses are null. That comparison is not evidence of an onchain reconciliation.
+Indexed note balances are checked against vault mint, burn, and redeem accounting in `services/indexer/test/reduce.test.ts`. A live `balanceOf` comparison refuses until `MONAD_RPC_URL` is set. That comparison is not evidence of an onchain reconciliation.
 
 ## Phase 9
 
-The deploy script simulates. It has not been broadcast. The deployer `0xE83722D1173fC5fD56FDCF638a6919a6a635f3A8` has 0 MON. A dry-run of `DeployProtocol` estimated about 4.45 MON for the stack alone. Seeding and market creation cost more. Do not copy addresses out of `contracts/broadcast/**/dry-run`. Those files have no transaction hash.
+`DeployProtocol` was broadcast on chain 10143. `packages/sdk/src/deployments/10143.json` records it from block 66840976. `SetFeeds` bound the six Equity.US session feeds. `SeedSynth` created session `90000001` (`VIGIL_SYNTH`, close delay 1800 seconds). The full `CreateMarkets` script, 30 markets in one transaction, simulated at about 12.7 MON when gas was 203 gwei, and was not broadcast. Thirteen markets were opened individually and allowed on `PolicyAdapter`: NVDA at 5/5, 10/10, 15/15, 25/25, 10/25, and 25/10; AAPL, TSLA, and MSFT at 5/5 and 10/10; AMZN at 5/5. The NYSE calendar was not seeded. Do not copy addresses out of `contracts/broadcast/**/dry-run`. Those files have no transaction hash.
 
 The deterministic deployer `0x4e59b44847b379578588920cA78FbF26c0B4956C` is already on chain 10143. Salts live in `contracts/script/Salts.sol`. The owner of the stack is the broadcasting key.
 
@@ -287,6 +287,6 @@ pnpm --filter @vigil/api start
 pnpm --filter @vigil/web dev
 ```
 
-The web app proxies `/vigil-api` to `VIGIL_API_URL`, default `http://127.0.0.1:8787`. While the core addresses are null, the pages render the API's "not deployed" reason and leave mint, burn, and redeem disabled. A position's worst case is the paired collateral; a naked leg can redeem zero. Cost and coverage stay blank because the index does not store them.
+The web app proxies `/vigil-api` to `VIGIL_API_URL`, default `http://127.0.0.1:8787`. The address book is filled from block 66840976. Mint, burn, and redeem stay disabled until a wallet is connected. No Closure Note book is bound, so the market page has no touch. A position's worst case is the paired collateral; a naked leg can redeem zero. Cost and coverage stay blank because the index does not store them.
 
 ## Phase 12
