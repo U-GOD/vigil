@@ -28,6 +28,7 @@ export type BroadcastReceipt = {
   status?: string | null;
   contractAddress?: string | null;
   blockNumber?: string | number | null;
+  transactionHash?: string | null;
 };
 
 export type BroadcastFile = {
@@ -43,11 +44,15 @@ export function applyBroadcast(
   if (receipts.length === 0) throw new Error("no successful broadcast");
   const blocks: number[] = [];
   const created = new Map<string, Address>();
+  const byHash = new Set<string>();
   for (const receipt of receipts) {
     if (!success(receipt.status)) throw new Error("broadcast receipt was not successful");
     const block = blockNumber(receipt.blockNumber);
     if (block === null) throw new Error("broadcast receipt has no block number");
     blocks.push(block);
+    if (typeof receipt.transactionHash === "string" && /^0x[0-9a-fA-F]{64}$/.test(receipt.transactionHash)) {
+      byHash.add(receipt.transactionHash.toLowerCase());
+    }
     if (!receipt.contractAddress || receipt.contractAddress === "0x0000000000000000000000000000000000000000") {
       continue;
     }
@@ -63,11 +68,13 @@ export function applyBroadcast(
     if (!isAddress(address) || address === "0x0000000000000000000000000000000000000000") {
       throw new Error(`${name} has no address`);
     }
-    if (!created.has(address.toLowerCase())) {
-      throw new Error(`${name} has no successful receipt`);
-    }
     if (typeof tx.hash !== "string" || !/^0x[0-9a-fA-F]{64}$/.test(tx.hash)) {
       throw new Error(`${name} has no transaction hash`);
+    }
+    // CREATE2 through the deterministic deployer leaves receipt.contractAddress empty.
+    // A successful receipt with the same hash is enough.
+    if (!created.has(address.toLowerCase()) && !byHash.has(tx.hash.toLowerCase())) {
+      throw new Error(`${name} has no successful receipt`);
     }
     found.set(slot[1], address);
   }
