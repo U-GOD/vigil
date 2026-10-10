@@ -339,4 +339,4 @@ The protocol stack is on Monad testnet. No Closure Note book is listed. Nothing 
 
 ## License
 
-Source license will be declared with the first contract commit.
+Source is licensed under the MIT License. See [LICENSE](LICENSE).
