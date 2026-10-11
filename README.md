@@ -24,7 +24,7 @@ A **Closure Note** is a fully collateralized, capped-linear claim on the return 
 
 A market is the tuple `(ticker, session, kUp, kDn, collateral)`. Anyone may deposit collateral and receive one CN-UP and one CN-DN per unit deposited. There is no issuer and therefore no issuer credit risk.
 
-Let \(P_{\text{close}}\) be the official closing print at the start of the window, \(P_{\text{open}}\) the official opening-auction print at the end, and \(\text{adj}\) the corporate-action factor (default 1).
+Let `P_close` be the official closing print at the start of the window, `P_open` the official opening-auction print at the end, and `adj` the corporate-action factor (default 1).
 
 ```
 r   = P_open / (P_close * adj) - 1
