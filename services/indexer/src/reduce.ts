@@ -1,7 +1,7 @@
 import { decodeTradesPacked } from "@toxicflow-labs/ts-sdk/events";
 import { extractSurface, type CapMid } from "@vigil/riskmodel";
 import { CN_BOOK_SPEC, WAD, neutralSplit } from "@vigil/sdk";
-import { getAddress, hexToString, isHex, type Hex } from "viem";
+import { getAddress, hexToString, isHex, keccak256, toBytes, type Hex } from "viem";
 import { applyPackedBook, emptyBook, quoteBook, type Book } from "./book.js";
 import type {
   GapView,
@@ -116,7 +116,14 @@ function kindOf(value: string): "close" | "open" {
   throw new Error(`unknown print kind ${value}`);
 }
 
+const TICKER_NAMES = ["NVDA", "AAPL", "TSLA", "MSFT", "AMZN", "GOOG", "SPY"] as const;
+const TICKER_BY_HASH = new Map(
+  TICKER_NAMES.map((name) => [keccak256(toBytes(name)).toLowerCase(), name]),
+);
+
 export function tickerLabel(ticker: string): string {
+  const known = TICKER_BY_HASH.get(ticker.toLowerCase());
+  if (known) return known;
   if (!isHex(ticker) || ticker.length !== 66) return ticker;
   return hexToString(ticker as Hex, { size: 32 }).replaceAll("\0", "");
 }
