@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { shortId } from "@/lib/format";
+import { CHAIN, shortError } from "@/lib/wallet";
 
 const links = [
   { href: "/", label: "Session" },
@@ -20,25 +21,70 @@ function Wallet() {
   const account = useAccount();
   const connect = useConnect();
   const disconnect = useDisconnect();
+  const switchChain = useSwitchChain();
   useEffect(() => setReady(true), []);
-  if (!ready) return <span className="wallet">Wallet</span>;
-  if (account.address) {
+
+  // The server render has no wallet. Hold the slot so the header does not jump.
+  if (!ready || account.isReconnecting) {
     return (
-      <span className="wallet">
-        {shortId(account.address)}{" "}
+      <div className="wallet">
+        <button type="button" disabled>
+          Wallet
+        </button>
+      </div>
+    );
+  }
+
+  if (account.address) {
+    const wrongChain = account.chainId !== CHAIN.id;
+    return (
+      <div className="wallet">
+        {wrongChain ? (
+          <button
+            type="button"
+            className="warn"
+            disabled={switchChain.isPending}
+            onClick={() => switchChain.switchChain({ chainId: CHAIN.id })}
+          >
+            {switchChain.isPending ? "Switching…" : `Switch to ${CHAIN.name}`}
+          </button>
+        ) : (
+          <span className="address" title={account.address}>
+            {shortId(account.address)}
+          </span>
+        )}
         <button type="button" onClick={() => disconnect.disconnect()}>
           Disconnect
         </button>
-      </span>
+        {switchChain.error ? <p className="wallet-note error">{shortError(switchChain.error)}</p> : null}
+      </div>
     );
   }
-  const connector = connect.connectors[0];
+
+  // Prefer an announced wallet (EIP-6963) over the generic injected slot.
+  const connectors = connect.connectors;
+  const connector = connectors.find((item) => item.id !== "injected") ?? connectors[0];
+  const hasProvider = typeof window !== "undefined" && "ethereum" in window;
+  if (!connector || (!hasProvider && connector.id === "injected")) {
+    return (
+      <div className="wallet">
+        <a className="button" href="https://metamask.io/download/" target="_blank" rel="noreferrer">
+          Install a wallet
+        </a>
+      </div>
+    );
+  }
   return (
-    <span className="wallet">
-      <button type="button" disabled={!connector} onClick={() => connector && connect.connect({ connector })}>
-        Connect wallet
+    <div className="wallet">
+      <button
+        type="button"
+        disabled={connect.isPending}
+        onClick={() => connect.connect({ connector, chainId: CHAIN.id })}
+      >
+        {connect.isPending ? "Connecting…" : "Connect wallet"}
       </button>
-    </span>
+      {connect.error ? <p className="wallet-note error">{shortError(connect.error)}</p> : null}
+    </div>
   );
 }
 
@@ -47,9 +93,13 @@ export function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="page">
       <header>
-        <Wallet />
-        <p className="mark">Vigil</p>
-        <p className="dateline">Monad testnet, chain 10143</p>
+        <div className="masthead">
+          <div>
+            <p className="mark">Vigil</p>
+            <p className="dateline">Monad testnet, chain {CHAIN.id}</p>
+          </div>
+          <Wallet />
+        </div>
         <nav>
           {links.map((link) => (
             <Link key={link.href} href={link.href} aria-current={path === link.href ? "page" : undefined}>
