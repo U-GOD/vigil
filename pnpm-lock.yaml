@@ -114,8 +114,8 @@ importers:
         version: 2.56.8(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
     devDependencies:
       '@metamask/agent-wallet':
-        specifier: ^6.2.0
-        version: 6.2.1(@babel/runtime@7.29.7)(bufferutil@4.1.0)(color@5.0.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+        specifier: ^7.1.0
+        version: 7.1.0(@babel/runtime@7.29.7)(bufferutil@4.1.0)(color@5.0.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.6
@@ -827,8 +827,8 @@ packages:
   '@lit/reactive-element@2.1.2':
     resolution: {integrity: sha512-pbCDiVMnne1lYUIaYNN5wrwQXDtHaYtg7YEFPeW+hws6U47WeFvISGUWekPGKWOP1ygrs0ef0o1VJMk1exos5A==}
 
-  '@metamask/agent-wallet@6.2.1':
-    resolution: {integrity: sha512-MLjf16PkNG48Y+nvjhYr9hjDoOSqQ9C9DaP/WUA0TyyO97aApWVMkI+7M9IRhvZXk4OMuWBXwZrET7uTEijFMQ==}
+  '@metamask/agent-wallet@7.1.0':
+    resolution: {integrity: sha512-4TzjKTgVV+/OgpdiOXlixeWfbqUpM0G0yu/NHkiflgS2cgVDR1ziMy5+DeshPMmmPTXqf8dOF7MZOEb7ohNXpg==}
     engines: {node: '>=22.18', npm: '>=10.x'}
     hasBin: true
     bundledDependencies:
@@ -4692,7 +4692,7 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.6.0
 
-  '@metamask/agent-wallet@6.2.1(@babel/runtime@7.29.7)(bufferutil@4.1.0)(color@5.0.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)':
+  '@metamask/agent-wallet@7.1.0(@babel/runtime@7.29.7)(bufferutil@4.1.0)(color@5.0.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)':
     dependencies:
       '@oclif/core': 4.14.0
       '@oclif/plugin-help': 6.3.0
