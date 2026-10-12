@@ -1,3 +1,5 @@
+import { keccak256, toBytes } from "viem";
+
 const WAD = 10n ** 18n;
 
 export type HoldingRisk = {
@@ -42,11 +44,12 @@ export function wadPercent(value: string | null | undefined): string {
   return `${sign}${hundredths / 100n}.${(hundredths % 100n).toString().padStart(2, "0")}%`;
 }
 
-export function timeToHalt(closeTs: string | null | undefined, nowSec: number): string {
-  if (!closeTs || !/^\d+$/.test(closeTs)) return "n/a";
-  const delta = Number(closeTs) - nowSec;
+/** Trading halts at the open that ends the closure window. */
+export function timeToHalt(openTs: string | null | undefined, nowSec: number): string {
+  if (!openTs || !/^\d+$/.test(openTs)) return "n/a";
+  const delta = Number(openTs) - nowSec;
   if (!Number.isFinite(delta)) return "n/a";
-  if (delta <= 0) return "past close";
+  if (delta <= 0) return "due";
   const hours = Math.floor(delta / 3600);
   const minutes = Math.floor((delta % 3600) / 60);
   return `${hours}h ${minutes}m`;
@@ -55,4 +58,17 @@ export function timeToHalt(closeTs: string | null | undefined, nowSec: number): 
 export function shortId(value: string): string {
   if (value.length <= 14) return value;
   return `${value.slice(0, 8)}…${value.slice(-4)}`;
+}
+
+export function capLabel(row: { kUp: string; kDn: string }): string {
+  return `${wadPercent(row.kUp)} / ${wadPercent(row.kDn)}`;
+}
+
+const EXCHANGES = new Map(
+  ["XNYS", "XNAS", "VIGIL_SYNTH"].map((name) => [keccak256(toBytes(name)), name]),
+);
+
+/** Exchange ids are keccak256 of the MIC. */
+export function exchangeLabel(id: string): string {
+  return EXCHANGES.get(id.toLowerCase() as `0x${string}`) ?? id;
 }
