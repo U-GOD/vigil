@@ -2,7 +2,9 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
+import { useAccount } from "wagmi";
 import { getJson } from "@/lib/api";
 import { holdingRisk, shortId, units, wadPercent } from "@/lib/format";
 import type { MarketRow, MarketsResponse, PositionsResponse } from "@/lib/types";
@@ -24,6 +26,7 @@ function Position() {
     enabled: /^0x[0-9a-fA-F]{40}$/.test(account),
     queryFn: () => getJson<PositionsResponse>(`/positions/${account}`),
   });
+  const wallet = useAccount();
   const byId = new Map((markets.data?.markets ?? []).map((row) => [row.marketId, row]));
 
   return (
@@ -34,22 +37,26 @@ function Position() {
         Worst case redemption is the paired amount. Cost paid and equity coverage are not in the index.
       </p>
       <p>{markets.data?.reason}</p>
-      <form action="/position" method="get">
+      <form action="/position" method="get" className="inline" key={account}>
         <label>
-          Address <input name="account" defaultValue={account} size={46} />
+          Address <input name="account" defaultValue={account} size={46} spellCheck={false} />
         </label>
         <button type="submit">Read</button>
+        {wallet.address && wallet.address.toLowerCase() !== account.toLowerCase() ? (
+          <Link href={`/position?account=${wallet.address}`}>Use connected wallet</Link>
+        ) : null}
       </form>
-      {positions.error ? <p>{positions.error.message}</p> : null}
+      {positions.error ? <p className="error">{positions.error.message}</p> : null}
+      <div className="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Market</th>
-            <th>Cap</th>
-            <th>UP</th>
-            <th>DN</th>
-            <th>Worst case redemption</th>
-            <th>Can redeem zero</th>
+            <th className="num">Cap</th>
+            <th className="num">UP</th>
+            <th className="num">DN</th>
+            <th className="num">Worst case redemption</th>
+            <th className="num">Can redeem zero</th>
             <th>Cost</th>
             <th>Coverage</th>
           </tr>
@@ -69,7 +76,7 @@ function Position() {
               const risk = holdingRisk(BigInt(row.up), BigInt(row.dn));
               return (
                 <tr key={row.marketId}>
-                  <td className="num">{market ? market.tickerLabel : shortId(row.marketId)}</td>
+                  <td>{market ? market.tickerLabel : shortId(row.marketId)}</td>
                   <td className="num">{market ? `${wadPercent(market.kUp)} / ${wadPercent(market.kDn)}` : "n/a"}</td>
                   <td className="num">{units(BigInt(row.up))}</td>
                   <td className="num">{units(BigInt(row.dn))}</td>
@@ -83,6 +90,7 @@ function Position() {
           )}
         </tbody>
       </table>
+      </div>
       <p>
         VUSD is the testnet collateral stand-in, 6 decimals. The unhedged counterfactual is the naked amount: without
         the pair, that quantity can redeem zero. An equity inventory is not in the index, so coverage stays blank.
@@ -101,14 +109,15 @@ function Unhedged({
 }) {
   if (rows.length === 0) return null;
   return (
+    <div className="table-wrap">
     <table>
       <thead>
         <tr>
           <th>Market</th>
           <th>State</th>
-          <th>Frozen sUp</th>
-          <th>Unhedged naked UP</th>
-          <th>Unhedged naked DN</th>
+          <th className="num">Frozen sUp</th>
+          <th className="num">Unhedged naked UP</th>
+          <th className="num">Unhedged naked DN</th>
         </tr>
       </thead>
       <tbody>
@@ -127,5 +136,6 @@ function Unhedged({
         })}
       </tbody>
     </table>
+    </div>
   );
 }
