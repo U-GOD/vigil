@@ -1,10 +1,5 @@
-import {
-  type CommandIO,
-  type InputSchema,
-  PluginCommand,
-  schemaToArgs,
-  schemaToFlags,
-} from "@metamask/agent-wallet/plugin";
+import type { CommandIO, InputSchema } from "@metamask/agent-wallet/plugin";
+import { PluginCommand, schemaToArgs, schemaToFlags } from "../../lib/host.js";
 import { isAddress, type Hex } from "viem";
 import { loadDeployments, WAD } from "@vigil/sdk";
 import { monadReader, readPermission, readSignerNonce } from "../../lib/chain.js";
