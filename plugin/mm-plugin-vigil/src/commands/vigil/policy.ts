@@ -1,10 +1,5 @@
-import {
-  type CommandIO,
-  type InputSchema,
-  PluginCommand,
-  schemaToArgs,
-  schemaToFlags,
-} from "@metamask/agent-wallet/plugin";
+import type { CommandIO, InputSchema } from "@metamask/agent-wallet/plugin";
+import { PluginCommand, schemaToArgs, schemaToFlags } from "../../lib/host.js";
 import { bool, text } from "../../lib/flags.js";
 import { applyPatch, loadPolicy, POLICY_LAYER, policyPath, savePolicy, serializePolicy } from "../../lib/policy.js";
 
