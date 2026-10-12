@@ -32,17 +32,17 @@ function Surface() {
       <h1>Surface</h1>
       <p>Implied closure-jump probabilities across the cap ladder, from two-sided UP mids. An empty book has no surface.</p>
       <p>{surface.data?.detail ?? markets.data?.reason}</p>
-      <form action="/surface" method="get">
+      <form action="/surface" method="get" className="inline">
         <label>
           Ticker <input name="ticker" defaultValue={ticker} size={12} />
         </label>
         <button type="submit">Read</button>
       </form>
       {names.length > 0 ? (
-        <p>
+        <p className="chips">
           {names.map((name) => (
-            <Link key={name} href={`/surface?ticker=${name}`}>
-              {name}{" "}
+            <Link key={name} href={`/surface?ticker=${name}`} className="chip" aria-current={name === ticker ? "page" : undefined}>
+              {name}
             </Link>
           ))}
         </p>
@@ -68,8 +68,8 @@ function Tail({ title, rows }: { title: string; rows: TailRow[] }) {
       <table>
         <thead>
           <tr>
-            <th>Cap</th>
-            <th>Probability</th>
+            <th className="num">Cap</th>
+            <th className="num">Probability</th>
           </tr>
         </thead>
         <tbody>
