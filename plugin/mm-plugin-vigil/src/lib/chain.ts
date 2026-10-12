@@ -1,6 +1,19 @@
-import { type Address, type Hex } from "viem";
+import { createPublicClient, defineChain, http, type Address, type Hex } from "viem";
 import { SLOT_COUNT, accountPermissionAbi, orderBookAbi, policyAdapterAbi } from "@vigil/sdk";
 import { bookPriceToWad, type ChainView } from "./plan.js";
+
+const MONAD_RPC = "https://testnet-rpc.monad.xyz";
+
+const monadTestnet = defineChain({
+  id: 10143,
+  name: "Monad Testnet",
+  nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
+  rpcUrls: { default: { http: [MONAD_RPC] } },
+});
+
+export function monadReader(): Reader {
+  return createPublicClient({ chain: monadTestnet, transport: http(MONAD_RPC) }) as Reader;
+}
 
 export type Reader = {
   readContract: (args: {
