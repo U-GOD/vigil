@@ -1,8 +1,7 @@
 import { createPublicClient, defineChain, http, type Address, type Hex } from "viem";
 import { SLOT_COUNT, accountPermissionAbi, orderBookAbi, policyAdapterAbi } from "@vigil/sdk";
 import { bookPriceToWad, type ChainView } from "./plan.js";
-
-const MONAD_RPC = "https://testnet-rpc.monad.xyz";
+import { MONAD_RPC } from "./rpc.js";
 
 const monadTestnet = defineChain({
   id: 10143,
