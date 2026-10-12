@@ -1,8 +1,5 @@
-import {
-  InputFieldType,
-  type BooleanField,
-  type TextField,
-} from "@metamask/agent-wallet/plugin";
+import type { BooleanField, TextField } from "@metamask/agent-wallet/plugin";
+import { InputFieldType } from "./host.js";
 
 export function text(
   flag: string,
