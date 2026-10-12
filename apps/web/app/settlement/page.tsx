@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { isAddress, type Address, type Hex } from "viem";
-import { useAccount, useWriteContract } from "wagmi";
 import { redeemRequest } from "@vigil/sdk/policy";
 import { getJson } from "@/lib/api";
-import { shortId, wadPercent } from "@/lib/format";
-import type { MarketsResponse, SessionResponse } from "@/lib/types";
+import { capLabel, exchangeLabel, shortId, wadPercent } from "@/lib/format";
+import { parseRaw, useMonadWrite } from "@/lib/wallet";
+import type { MarketRow, MarketsResponse, SessionResponse } from "@/lib/types";
 
 export default function SettlementPage() {
   return (
@@ -35,31 +35,42 @@ function Settlement() {
       <h1>Settlement</h1>
       <p>Prints, the frozen split, and redemption. The reporter set, the median, and the dispute window are not in the index.</p>
       <p>{session.data?.reason ?? markets.data?.reason}</p>
-      <form action="/settlement" method="get">
+      {session.isError ? <p className="error">{session.error.message}</p> : null}
+      <form action="/settlement" method="get" className="inline">
         <label>
           Session <input name="session" defaultValue={sessionId} size={16} />
         </label>
         <button type="submit">Open</button>
       </form>
       {ids.length > 0 ? (
-        <p>
+        <p className="chips">
           {ids.map((id) => (
-            <Link key={id} href={`/settlement?session=${id}`}>
-              {id}{" "}
+            <Link
+              key={id}
+              href={`/settlement?session=${id}`}
+              className="chip"
+              aria-current={id === sessionId ? "page" : undefined}
+            >
+              {id}
             </Link>
           ))}
         </p>
       ) : null}
-      {session.data ? <SessionDetail data={session.data} /> : null}
+      {session.data ? (
+        <SessionDetail
+          data={session.data}
+          markets={(markets.data?.markets ?? []).filter((row) => row.sessionId === sessionId)}
+        />
+      ) : null}
     </>
   );
 }
 
-function SessionDetail({ data }: { data: SessionResponse }) {
-  const account = useAccount();
-  const write = useWriteContract();
+function SessionDetail({ data, markets }: { data: SessionResponse; markets: MarketRow[] }) {
+  const wallet = useMonadWrite();
+  const [inputError, setInputError] = useState<string | null>(null);
   const session = data.session;
-  const canRedeem = data.policy !== null && account.address !== undefined;
+  const canRedeem = data.policy !== null && isAddress(data.policy) && wallet.connected && !wallet.busy;
 
   return (
     <>
@@ -67,15 +78,15 @@ function SessionDetail({ data }: { data: SessionResponse }) {
       {session ? (
         <dl>
           <dt>Exchange</dt>
-          <dd>{session.exchange}</dd>
+          <dd title={session.exchange}>{exchangeLabel(session.exchange)}</dd>
           <dt>Close</dt>
-          <dd className="num">{session.closeTs}</dd>
+          <dd className="mono">{utc(session.closeTs)}</dd>
           <dt>Open</dt>
-          <dd className="num">{session.openTs}</dd>
+          <dd className="mono">{utc(session.openTs)}</dd>
           <dt>Fallback</dt>
-          <dd className="num">{session.fallbackDeadline}</dd>
+          <dd className="mono">{utc(session.fallbackDeadline)}</dd>
           <dt>Print band</dt>
-          <dd className="num">{session.printBandSecs}s</dd>
+          <dd className="mono">{session.printBandSecs}s</dd>
           <dt>No auction</dt>
           <dd>{session.noAuction ? "yes" : "no"}</dd>
         </dl>
@@ -84,13 +95,14 @@ function SessionDetail({ data }: { data: SessionResponse }) {
       )}
 
       <h2>Prints</h2>
+      <div className="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Ticker</th>
             <th>Kind</th>
-            <th>Price</th>
-            <th>Candidate</th>
+            <th className="num">Price</th>
+            <th className="num">Candidate</th>
             <th>Finalized</th>
             <th>Voided</th>
           </tr>
@@ -114,15 +126,17 @@ function SessionDetail({ data }: { data: SessionResponse }) {
           )}
         </tbody>
       </table>
+      </div>
 
       <h2>Frozen split</h2>
+      <div className="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Market</th>
-            <th>sUp</th>
+            <th className="num">sUp</th>
             <th>Fallback</th>
-            <th>Block</th>
+            <th className="num">Block</th>
           </tr>
         </thead>
         <tbody>
@@ -142,31 +156,43 @@ function SessionDetail({ data }: { data: SessionResponse }) {
           )}
         </tbody>
       </table>
+      </div>
 
       <h2>Redeem</h2>
       <form
+        className="inline"
         onSubmit={(event) => {
           event.preventDefault();
-          if (!data.policy || !account.address || !isAddress(data.policy)) return;
+          if (!data.policy || !wallet.address || !isAddress(data.policy)) return;
           const form = new FormData(event.currentTarget);
           const marketId = String(form.get("marketId") ?? "");
-          const request = redeemRequest(
-            data.policy as Address,
-            marketId as Hex,
-            BigInt(String(form.get("up") ?? "0")),
-            BigInt(String(form.get("dn") ?? "0")),
-            account.address,
-          );
-          write.writeContract({
-            address: request.address,
-            abi: request.abi,
-            functionName: request.functionName,
-            args: request.args,
-          });
+          const up = parseRaw(form.get("up"));
+          const dn = parseRaw(form.get("dn"));
+          if (!/^0x[0-9a-fA-F]{64}$/.test(marketId)) {
+            setInputError("Pick a market.");
+            return;
+          }
+          if (up === null || dn === null || up + dn === 0n) {
+            setInputError("UP and DN are whole 6-decimal units, and at least one must be above zero.");
+            return;
+          }
+          setInputError(null);
+          wallet.send(redeemRequest(data.policy as Address, marketId as Hex, up, dn, wallet.address));
         }}
       >
         <label>
-          Market <input name="marketId" size={42} />
+          Market{" "}
+          {markets.length > 0 ? (
+            <select name="marketId" defaultValue={markets[0]?.marketId}>
+              {markets.map((row) => (
+                <option key={row.marketId} value={row.marketId}>
+                  {row.tickerLabel} {capLabel(row)} · {row.state}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input name="marketId" size={42} spellCheck={false} />
+          )}
         </label>
         <label>
           UP <input name="up" defaultValue="0" size={10} />
@@ -178,8 +204,20 @@ function SessionDetail({ data }: { data: SessionResponse }) {
           Redeem
         </button>
       </form>
-      <p>{canRedeem ? "PolicyAdapter will receive this redemption." : "PolicyAdapter is not deployed, or the wallet is not connected."}</p>
-      {write.error ? <p>{write.error.message}</p> : null}
+      <p>
+        {data.policy === null
+          ? "PolicyAdapter is not deployed."
+          : !wallet.connected
+            ? "Connect a wallet to redeem."
+            : `PolicyAdapter ${shortId(data.policy)} will receive this redemption. It reverts until the market is finalized.`}
+      </p>
+      {inputError ? <p className="status error">{inputError}</p> : null}
+      {wallet.status}
     </>
   );
+}
+
+function utc(ts: string): string {
+  if (!/^\d+$/.test(ts)) return ts;
+  return `${new Date(Number(ts) * 1000).toISOString().slice(0, 16).replace("T", " ")} UTC`;
 }
