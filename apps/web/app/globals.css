@@ -1,6 +1,11 @@
 :root {
   --paper: #f3ead7;
   --ink: #1d3557;
+  --rule: rgba(29, 53, 87, 0.28);
+  --wash: rgba(29, 53, 87, 0.07);
+  --red: #9b2c2c;
+  --green: #2f6b3a;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
 }
 
 * { box-sizing: border-box; }
@@ -49,20 +54,45 @@ header {
   font-size: 0.95rem;
 }
 
-nav { margin-top: 0.7rem; }
-
-nav a {
-  margin-right: 1.2rem;
-  text-decoration: none;
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
 }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  margin-top: 0.7rem;
+}
+
+nav a { text-decoration: none; }
 
 nav a[aria-current="page"] { text-decoration: underline; }
 
 .wallet {
-  float: right;
-  margin-top: -2.4rem;
-  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 22rem;
   font-size: 0.9rem;
+}
+
+.wallet .address {
+  font-family: var(--mono);
+  padding: 0.2rem 0.5rem;
+  background: var(--wash);
+}
+
+.wallet-note {
+  flex-basis: 100%;
+  margin: 0;
+  text-align: right;
+  font-size: 0.82rem;
 }
 
 h1 {
@@ -85,22 +115,89 @@ form { margin: 0.6rem 0 1rem; }
 
 label { margin-right: 0.8rem; }
 
-input, button {
+input, button, select, a.button {
   font: inherit;
   color: var(--ink);
   background: transparent;
   border: 1px solid var(--ink);
   border-radius: 0;
-  padding: 0.2rem 0.45rem;
+  padding: 0.2rem 0.6rem;
 }
 
-button { cursor: pointer; }
-button:disabled { cursor: default; }
+a.button { display: inline-block; text-decoration: none; }
 
-input:focus, button:focus, a:focus {
+input { font-family: var(--mono); font-size: 0.9em; }
+select { max-width: 100%; }
+
+button { cursor: pointer; }
+button:hover:not(:disabled), a.button:hover { background: var(--ink); color: var(--paper); }
+button:disabled { cursor: default; opacity: 0.45; }
+button.warn { border-color: var(--red); color: var(--red); }
+button.warn:hover:not(:disabled) { background: var(--red); color: var(--paper); }
+
+input:focus-visible, button:focus-visible, select:focus-visible, a:focus-visible {
   outline: 1px solid var(--ink);
   outline-offset: 2px;
 }
+
+form.inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.6rem;
+}
+
+form.inline label { margin-right: 0.2rem; }
+form.inline input { max-width: 100%; }
+
+.lede { font-size: 1.02rem; }
+.hint { font-size: 0.9rem; opacity: 0.8; }
+.status { font-size: 0.95rem; }
+.error { color: var(--red); }
+.ok { color: var(--green); }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  text-decoration: none;
+  padding: 0.12rem 0.5rem;
+  border: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.chip:hover { border-color: var(--ink); }
+.chip[aria-current="page"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.picker { margin: 0.8rem 0 1rem; }
+
+.picker-row {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: baseline;
+}
+
+.picker-row .chips { margin: 0.2rem 0; }
+
+.picker-session {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 0.4rem 0 1rem;
+}
+
+.table-wrap table { margin: 0; }
 
 table {
   width: 100%;
@@ -109,11 +206,17 @@ table {
 }
 
 th, td {
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
   text-align: left;
-  padding: 0.35rem 0.5rem 0.35rem 0;
-  vertical-align: top;
+  padding: 0.35rem 0.9rem 0.35rem 0;
+  vertical-align: baseline;
+  white-space: nowrap;
 }
+
+th:last-child, td:last-child { padding-right: 0; }
+
+thead th { border-bottom-color: var(--ink); }
+tbody tr:hover { background: var(--wash); }
 
 th {
   font-weight: normal;
@@ -123,14 +226,23 @@ th {
 }
 
 .num {
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--mono);
+  font-size: 0.9em;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
+th.num { font-family: inherit; font-size: 0.78rem; }
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
 dl {
   display: grid;
-  grid-template-columns: 12rem 1fr;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  row-gap: 0.15rem;
   margin: 0.2rem 0 0.8rem;
 }
 
@@ -175,7 +287,7 @@ footer {
 .manual h2 { scroll-margin-top: 1rem; }
 
 .manual pre {
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--mono);
   font-size: 0.92rem;
   line-height: 1.4;
   border-left: 2px solid var(--ink);
@@ -186,11 +298,25 @@ footer {
 }
 
 .manual code {
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--mono);
   font-size: 0.92em;
 }
 
 @media (max-width: 760px) {
+  body { font-size: 16px; }
+
+  .page { padding: 1.1rem 0.9rem 3rem; }
+
+  .masthead { flex-wrap: wrap; }
+
+  .wallet { justify-content: flex-start; max-width: none; }
+
+  .wallet-note { text-align: left; }
+
+  dl { grid-template-columns: 8rem minmax(0, 1fr); }
+
+  .picker-row { grid-template-columns: 1fr; gap: 0; }
+
   .manual {
     grid-template-columns: 1fr;
   }
