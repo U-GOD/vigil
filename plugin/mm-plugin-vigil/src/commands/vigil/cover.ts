@@ -9,10 +9,10 @@ import { WAD } from "@vigil/sdk";
 import { coverPlan } from "../../lib/gather.js";
 import { fairForCap } from "../../lib/fair.js";
 import { bool, text } from "../../lib/flags.js";
-import { CHAIN_ID, parseAccount, parseInteger, parseOptionalInteger } from "../../lib/parse.js";
+import { parseAccount, parseInteger, parseOptionalInteger } from "../../lib/parse.js";
 import { loadPolicy, policyPath } from "../../lib/policy.js";
 import { runPlan } from "../../lib/run.js";
-import type { Reader } from "../../lib/chain.js";
+import { monadReader } from "../../lib/chain.js";
 
 const inputs = {
   ticker: text("ticker", "Equity ticker", { required: true, index: 0 }),
@@ -47,7 +47,7 @@ export default class Cover extends PluginCommand {
       return { report };
     }
     const plan = await coverPlan({
-      client: io.ctx.publicClient(CHAIN_ID) as Reader,
+      client: monadReader(),
       ticker: flags.ticker,
       inventoryValue: parseInteger(flags.inventory, "inventory"),
       coverage: parseOptionalInteger(flags.coverage) ?? WAD,
