@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useQuery, useQueries } from "@tanstack/react-query";
 import { getJson } from "@/lib/api";
-import { timeToHalt, wadPercent } from "@/lib/format";
+import { capLabel, timeToHalt, wadPercent } from "@/lib/format";
 import type { MarketRow, MarketsResponse, SessionResponse } from "@/lib/types";
 
 export default function SessionBoard() {
@@ -20,44 +20,52 @@ export default function SessionBoard() {
       queryFn: () => getJson<SessionResponse>(`/sessions/${id}`),
     })),
   });
-  const closeById = new Map(
-    sessions.flatMap((query) => (query.data?.session ? [[query.data.session.sessionId, query.data.session.closeTs]] : [])),
+  const openById = new Map(
+    sessions.flatMap((query) => (query.data?.session ? [[query.data.session.sessionId, query.data.session.openTs]] : [])),
   );
   const now = Math.floor(Date.now() / 1000);
 
   return (
     <>
       <h1>Session board</h1>
-      <p>{markets.data?.reason ?? (markets.isError ? markets.error.message : "Reading the index.")}</p>
+      <p className="lede">
+        {markets.isPending
+          ? "Reading the index."
+          : markets.isError
+            ? markets.error.message
+            : (markets.data.reason ?? `${rows.length} markets indexed. Halt is the open that ends each closure window.`)}
+      </p>
+      <div className="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Session</th>
             <th>Ticker</th>
-            <th>Cap</th>
+            <th className="num">Cap</th>
             <th>State</th>
-            <th>Time to halt</th>
-            <th>Mid</th>
-            <th>Implied premium</th>
-            <th>Bid depth</th>
-            <th>Ask depth</th>
+            <th className="num">Time to halt</th>
+            <th className="num">Mid</th>
+            <th className="num">Implied premium</th>
+            <th className="num">Bid depth</th>
+            <th className="num">Ask depth</th>
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={9}>No markets are indexed.</td>
+              <td colSpan={9}>{markets.isPending ? "Loading." : "No markets are indexed."}</td>
             </tr>
           ) : (
-            rows.map((row) => <BoardRow key={row.marketId} row={row} closeTs={closeById.get(row.sessionId)} now={now} />)
+            rows.map((row) => <BoardRow key={row.marketId} row={row} openTs={openById.get(row.sessionId)} now={now} />)
           )}
         </tbody>
       </table>
+      </div>
     </>
   );
 }
 
-function BoardRow({ row, closeTs, now }: { row: MarketRow; closeTs: string | undefined; now: number }) {
+function BoardRow({ row, openTs, now }: { row: MarketRow; openTs: string | undefined; now: number }) {
   return (
     <tr>
       <td>
@@ -67,10 +75,10 @@ function BoardRow({ row, closeTs, now }: { row: MarketRow; closeTs: string | und
         <Link href={`/market?id=${row.marketId}`}>{row.tickerLabel}</Link>
       </td>
       <td className="num">
-        {wadPercent(row.kUp)} / {wadPercent(row.kDn)}
+        {capLabel(row)}
       </td>
       <td>{row.state}</td>
-      <td className="num">{timeToHalt(closeTs, now)}</td>
+      <td className="num">{timeToHalt(openTs, now)}</td>
       <td className="num">{wadPercent(row.midUp)}</td>
       <td className="num">{wadPercent(row.impliedPremium)}</td>
       <td className="num">{row.depthBid}</td>
