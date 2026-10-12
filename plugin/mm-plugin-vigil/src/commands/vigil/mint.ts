@@ -7,10 +7,10 @@ import {
 } from "@metamask/agent-wallet/plugin";
 import { mintPlan } from "../../lib/gather.js";
 import { bool, text } from "../../lib/flags.js";
-import { CHAIN_ID, parseAccount, parseInteger, parseOptionalInteger } from "../../lib/parse.js";
+import { parseAccount, parseInteger, parseOptionalInteger } from "../../lib/parse.js";
 import { loadPolicy, policyPath } from "../../lib/policy.js";
 import { runPlan } from "../../lib/run.js";
-import type { Reader } from "../../lib/chain.js";
+import { monadReader } from "../../lib/chain.js";
 
 const inputs = {
   ticker: text("ticker", "Equity ticker", { required: true, index: 0 }),
@@ -31,7 +31,7 @@ export default class Mint extends PluginCommand {
   async execute(io: CommandIO): Promise<{ report: string }> {
     const flags = await io.resolveInputs(inputs);
     const plan = await mintPlan({
-      client: io.ctx.publicClient(CHAIN_ID) as Reader,
+      client: monadReader(),
       ticker: flags.ticker,
       pairs: parseInteger(flags.pairs, "pairs"),
       burn: flags.burn,
