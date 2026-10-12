@@ -12,6 +12,7 @@ const links = [
   { href: "/position", label: "Position" },
   { href: "/settlement", label: "Settlement" },
   { href: "/surface", label: "Surface" },
+  { href: "/docs", label: "Manual" },
 ];
 
 function Wallet() {
