@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { holdingRisk, timeToHalt, units, wadPercent } from "./format.js";
+import { capLabel, exchangeLabel, holdingRisk, timeToHalt, units, wadPercent } from "./format.js";
 
 describe("terminal figures", () => {
   it("puts the worst case on the paired amount", () => {
@@ -16,7 +16,10 @@ describe("terminal figures", () => {
   it("formats a cap and a clock", () => {
     expect(wadPercent((10n ** 17n).toString())).toBe("10.00%");
     expect(wadPercent(null)).toBe("n/a");
-    expect(timeToHalt("1000", 1000)).toBe("past close");
+    expect(timeToHalt("1000", 1000)).toBe("due");
     expect(timeToHalt("4660", 1000)).toBe("1h 1m");
+    expect(exchangeLabel("0xe819a04300088f683787b40bd39e00a82828e1a44fa61359bcd20451afbda831")).toBe("XNYS");
+    expect(exchangeLabel("0x01")).toBe("0x01");
+    expect(capLabel({ kUp: (5n * 10n ** 16n).toString(), kDn: (10n ** 17n).toString() })).toBe("5.00% / 10.00%");
   });
 });
