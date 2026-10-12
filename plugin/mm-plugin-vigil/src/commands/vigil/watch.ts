@@ -7,7 +7,7 @@ import {
 } from "@metamask/agent-wallet/plugin";
 import { isAddress, type Hex } from "viem";
 import { loadDeployments, WAD } from "@vigil/sdk";
-import { readPermission, readSignerNonce, type Reader } from "../../lib/chain.js";
+import { monadReader, readPermission, readSignerNonce } from "../../lib/chain.js";
 import { buildTradeDelegate, tradeDelegateCall } from "../../lib/delegate.js";
 import { coverPlan } from "../../lib/gather.js";
 import { fairForCap } from "../../lib/fair.js";
@@ -59,7 +59,7 @@ export default class Watch extends PluginCommand {
         break;
       }
       const plan = await coverPlan({
-        client: io.ctx.publicClient(CHAIN_ID) as Reader,
+        client: monadReader(),
         ticker: flags.ticker,
         inventoryValue: parseInteger(flags.inventory, "inventory"),
         coverage: parseOptionalInteger(flags.coverage) ?? WAD,
@@ -88,7 +88,7 @@ async function authorizeDelegate(
   if (!isAddress(signerRaw)) return "Delegate must be an address. No signer was authorized.";
   const session = closureSession(Math.floor(Date.now() / 1000));
   if (!session) return "No live session. A TRADE delegate was not authorized.";
-  const client = io.ctx.publicClient(CHAIN_ID) as Reader;
+  const client = monadReader();
   const accountCore = loadDeployments(CHAIN_ID).kuru.accountCore;
   const trade = await readPermission(client, accountCore, "ACCOUNT_PERMISSION_TRADE");
   const withdraw = await readPermission(client, accountCore, "ACCOUNT_PERMISSION_WITHDRAW");
