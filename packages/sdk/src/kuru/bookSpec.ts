@@ -13,12 +13,12 @@ export const CN_BOOK_SPEC = {
 
 /** Live MON/USDC params read from the book. Size and tick differ from a CN book. */
 export const MON_USDC_BOOK = {
-  market: "0xfdbE356828c8f5A5d5ed4f69ddE0816f4058Ef61",
-  pricePrecision: 1_000_000,
-  sizePrecision: 100_000_000,
-  tickSize: 1,
+  market: "0xD2F64EaF7E85688802d24C18ea268C365533b344",
+  pricePrecision: 100_000_000,
+  sizePrecision: 10_000_000_000,
+  tickSize: 100,
   minQuoteNotional: 10_000_000n,
   maxQuoteNotional: 5_000_000_000_000n,
-  takerFeePps: 7000n,
-  makerFeePps: 4000n,
+  takerFeePps: 2000n,
+  makerFeePps: 0n,
 } as const;
