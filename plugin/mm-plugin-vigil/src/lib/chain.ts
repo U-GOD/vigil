@@ -109,9 +109,9 @@ const erc20Abi = [
 const accountAbi = [
   {
     type: "function",
-    name: "userRegistry",
+    name: "rootAccountIdOf",
     stateMutability: "view",
-    inputs: [{ name: "user", type: "address" }],
+    inputs: [{ name: "owner", type: "address" }],
     outputs: [{ name: "id", type: "uint40" }],
   },
 ] as const;
@@ -199,7 +199,7 @@ export async function readCoverChain(
     await client.readContract({
       address: args.accountCore,
       abi: accountAbi,
-      functionName: "userRegistry",
+      functionName: "rootAccountIdOf",
       args: [args.account],
     }),
   );
