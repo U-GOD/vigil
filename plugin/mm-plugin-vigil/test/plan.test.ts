@@ -128,7 +128,7 @@ describe("cover calldata", () => {
     const expected = [
       pluginCall(buyProtectionRequest(adapter, market, notional)),
       pluginCall(approveTokenRequest({ token: collateral, spender: accountCore, amount: notional })),
-      pluginCall(depositRequest({ accountCore, token: collateral, amount: notional })),
+      pluginCall(depositRequest({ accountCore, rootOwner: account, token: collateral, amount: notional })),
       pluginCall(
         placeBatch(slots, {
           market: bookDn,
