@@ -10,8 +10,8 @@ import {IKuruSpotRouter} from "../src/interfaces/IKuruSpotRouter.sol";
 
 /// @notice Deploys the listing adapter. It does not create Kuru markets.
 contract DeployListing is Script {
-    address internal constant ROUTER = 0xba24a1042701f06e8F7edCF04389260D1Fa4c697;
-    address internal constant CORE = 0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22;
+    address internal constant ROUTER = 0x008200AD02fCb7020B019D11Cbabd32FecE1De78;
+    address internal constant CORE = 0xe08573a1Ecc4aa507c9626071fA0c4513caf7906;
 
     function run() external {
         uint256 pk = vm.envUint("DEPLOYER_PRIVATE_KEY");
