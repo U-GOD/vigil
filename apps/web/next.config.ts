@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
-const api = process.env.VIGIL_API_URL ?? "http://127.0.0.1:8787";
+// With VIGIL_API_URL set, /vigil-api proxies to services/api. Without it, app/vigil-api
+// serves the same routes from Monad testnet contract reads.
+const api = process.env.VIGIL_API_URL;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@vigil/sdk"],
+  transpilePackages: ["@vigil/sdk", "@vigil/api", "@vigil/indexer", "@vigil/riskmodel", "@vigil/marketdata"],
   async rewrites() {
-    return [{ source: "/vigil-api/:path*", destination: `${api}/:path*` }];
+    return api ? { beforeFiles: [{ source: "/vigil-api/:path*", destination: `${api}/:path*` }], afterFiles: [], fallback: [] } : [];
   },
 };
 
