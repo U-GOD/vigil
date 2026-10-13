@@ -2,24 +2,29 @@
 pragma solidity ^0.8.28;
 
 /// @notice Application surface of Kuru AccountCore (Spot V2).
-/// @dev ABI source: toxicflow-labs ts-sdk 0.1.1,
-///      proxy 0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22.
+/// @dev ABI source: toxicflow-labs ts-sdk 0.3.0,
+///      proxy 0xe08573a1Ecc4aa507c9626071fA0c4513caf7906.
 interface IKuruAccountCore {
-    function deposit(address token, uint256 amount) external payable;
+    /// @dev Credits the owner's root account and creates it on first deposit.
+    function deposit(address rootOwner, address token, uint256 amount) external payable;
 
-    function depositForAccount(address account, address token, uint256 amount) external payable;
+    function withdraw(
+        uint40 rootAccountId,
+        address token,
+        uint256 amount,
+        address recipient
+    ) external;
 
-    function withdraw(address token, uint256 amount) external;
-
-    function withdrawFromAccount(address account, address token, uint256 amount) external;
-
-    function userRegistry(
-        address user
+    function rootAccountIdOf(
+        address owner
     ) external view returns (uint40 id);
 
-    function getBalance(address user, address token) external view returns (uint256);
+    function getBalance(uint40 accountId, address token) external view returns (uint256);
 
-    function getSpotReservedBalance(address user, address token) external view returns (uint256);
+    function getSpotReservedBalance(
+        uint40 accountId,
+        address token
+    ) external view returns (uint256);
 
     function spotTokenEnabled(
         address token
@@ -41,7 +46,7 @@ interface IKuruAccountCore {
         address account,
         address signer,
         uint32 permissions,
-        uint256 expiry
+        uint64 expiry
     ) external;
 
     function revokeAccountSigner(address account, address signer) external;
