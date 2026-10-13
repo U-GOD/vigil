@@ -8,8 +8,8 @@ describe("deployments", () => {
   it("loads the Monad testnet address book", () => {
     const d = loadDeployments(10143);
     expect(d.chainId).toBe(10143);
-    expect(d.kuru.accountCore).toBe("0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22");
-    expect(d.kuru.spotRouter).toBe("0xba24a1042701f06e8F7edCF04389260D1Fa4c697");
+    expect(d.kuru.accountCore).toBe("0xe08573a1Ecc4aa507c9626071fA0c4513caf7906");
+    expect(d.kuru.spotRouter).toBe("0x008200AD02fCb7020B019D11Cbabd32FecE1De78");
     expect(d.pyth).toBe("0x2880aB155794e7179c9eE2e38200202908C17B43");
     expect(d.core.factory).toBe("0x24CCaE43cD194Ba893608F1a4d445749D25b435f");
     expect(d.core.policy).toBe("0xCf590C99C9FA28e3a220cA9CfC9b05C969140310");
