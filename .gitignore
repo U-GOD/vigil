@@ -44,3 +44,7 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Local agent skill installs (npx skills add)
+.agents/
+skills-lock.json
