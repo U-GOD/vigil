@@ -61,9 +61,13 @@ function Wallet() {
     );
   }
 
-  // Prefer an announced wallet (EIP-6963) over the generic injected slot.
+  // Prefer MetaMask, then any other announced wallet (EIP-6963), then the generic injected slot.
+  // Announcement order follows extension load order, so the first announced wallet is not stable.
   const connectors = connect.connectors;
-  const connector = connectors.find((item) => item.id !== "injected") ?? connectors[0];
+  const connector =
+    connectors.find((item) => item.id === "io.metamask") ??
+    connectors.find((item) => item.id !== "injected") ??
+    connectors[0];
   const hasProvider = typeof window !== "undefined" && "ethereum" in window;
   if (!connector || (!hasProvider && connector.id === "injected")) {
     return (
