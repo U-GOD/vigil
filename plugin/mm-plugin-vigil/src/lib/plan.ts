@@ -209,7 +209,7 @@ export function planCover(
     steps.push(
       tx(
         "Deposit collateral into AccountCore. Withdraw is a separate command.",
-        depositRequest({ accountCore: input.accountCore, token: input.collateral, amount: notional }),
+        depositRequest({ accountCore: input.accountCore, rootOwner: input.account, token: input.collateral, amount: notional }),
       ),
     );
     const order = orderStep(
@@ -257,7 +257,7 @@ export function planCover(
   steps.push(
     tx(
       "Deposit the UP note into AccountCore.",
-      depositRequest({ accountCore: input.accountCore, token: chain.noteUp, amount: pairs }),
+      depositRequest({ accountCore: input.accountCore, rootOwner: input.account, token: chain.noteUp, amount: pairs }),
     ),
   );
   const order = orderStep(
@@ -424,7 +424,7 @@ export function planUnderwrite(
     steps.push(
       tx(
         `Deposit the ${leg.ticker} DN note.`,
-        depositRequest({ accountCore: input.accountCore, token: leg.noteDn, amount: capped }),
+        depositRequest({ accountCore: input.accountCore, rootOwner: input.account, token: leg.noteDn, amount: capped }),
       ),
     );
     const order = orderStep(
@@ -517,7 +517,7 @@ export function planRoll(
     ),
     tx(
       "Deposit the wider UP note.",
-      depositRequest({ accountCore: input.accountCore, token: input.widerNoteUp, amount: pairs }),
+      depositRequest({ accountCore: input.accountCore, rootOwner: input.account, token: input.widerNoteUp, amount: pairs }),
     ),
   ];
   const order = orderStep(input.widerLiveOrderIds, "Rest a post-only sell of the wider UP leg.", {
