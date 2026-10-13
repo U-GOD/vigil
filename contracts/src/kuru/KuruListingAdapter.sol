@@ -214,16 +214,15 @@ contract KuruListingAdapter is Ownable {
     function _matchMarketParams(IKuruOrderBook orderBook, BookSpec memory spec) internal view {
         (
             uint32 pricePrecision,
-            uint32 sizePrecision,
+            uint96 sizePrecision,
             uint32 tickSize,
             uint96 minQuoteNotional,
             uint96 maxQuoteNotional,
             uint256 takerFeePps,
             uint256 makerFeePps
         ) = orderBook.getMarketParams();
-        if (spec.sizePrecision > type(uint32).max) revert SpecMismatch();
         if (
-            pricePrecision != spec.pricePrecision || sizePrecision != uint32(spec.sizePrecision)
+            pricePrecision != spec.pricePrecision || sizePrecision != spec.sizePrecision
                 || tickSize != spec.tickSize || minQuoteNotional != spec.minQuoteNotional
                 || maxQuoteNotional != spec.maxQuoteNotional || takerFeePps != spec.takerFeePps
                 || makerFeePps != spec.makerFeePps
