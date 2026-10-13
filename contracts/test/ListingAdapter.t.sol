@@ -11,10 +11,6 @@ import {IKuruOrderBook} from "../src/interfaces/IKuruOrderBook.sol";
 import {IKuruSpotRouter} from "../src/interfaces/IKuruSpotRouter.sol";
 import {Fixture} from "./helpers/Fixture.sol";
 
-interface ITestnetFaucet {
-    function claim() external;
-}
-
 contract RevertRouter {
     fallback() external payable {
         revert("router touched");
@@ -98,7 +94,7 @@ contract MockBook {
         view
         returns (
             uint32 pricePrecision,
-            uint32 sizePrecision,
+            uint96 sizePrecision,
             uint32 tick,
             uint96 minQuoteNotional,
             uint96 maxQuoteNotional,
@@ -232,10 +228,6 @@ contract ListingAdapterTest is Fixture {
         adapter.requestListing(id, _spec());
     }
 
-    function test_faucetClaimSelector() public pure {
-        assertEq(ITestnetFaucet.claim.selector, bytes4(hex"4e71d92d"));
-    }
-
     function test_monUsdcBookIsVerified() public {
         string memory url;
         try this.rpcUrl() returns (string memory got) {
@@ -250,31 +242,31 @@ contract ListingAdapterTest is Fixture {
         }
         vm.createSelectFork(url);
 
-        address monUsdc = 0xfdbE356828c8f5A5d5ed4f69ddE0816f4058Ef61;
-        IKuruSpotRouter liveRouter = IKuruSpotRouter(0xba24a1042701f06e8F7edCF04389260D1Fa4c697);
-        IKuruAccountCore liveCore = IKuruAccountCore(0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22);
+        address monUsdc = 0xD2F64EaF7E85688802d24C18ea268C365533b344;
+        IKuruSpotRouter liveRouter = IKuruSpotRouter(0x008200AD02fCb7020B019D11Cbabd32FecE1De78);
+        IKuruAccountCore liveCore = IKuruAccountCore(0xe08573a1Ecc4aa507c9626071fA0c4513caf7906);
         assertTrue(liveRouter.verifiedSpotMarket(monUsdc));
         assertTrue(liveCore.verifiedSpotOrderBook(monUsdc));
 
         IKuruOrderBook book = IKuruOrderBook(monUsdc);
         assertEq(book.baseToken(), address(0));
-        assertEq(book.quoteToken(), 0xEe0722ead54f1B4fe97bE399Be43BC0226a6f97E);
+        assertEq(book.quoteToken(), 0xb01DC575a7ef75e58A05D2bde73ab79f8e7dd0Be);
         (
             uint32 pricePrecision,
-            uint32 sizePrecision,
+            uint96 sizePrecision,
             uint32 tickSize,
             uint96 minQuote,
             uint96 maxQuote,
             uint256 taker,
             uint256 maker
         ) = book.getMarketParams();
-        assertEq(pricePrecision, 1_000_000);
-        assertEq(sizePrecision, 100_000_000);
-        assertEq(tickSize, 1);
+        assertEq(pricePrecision, 100_000_000);
+        assertEq(sizePrecision, 10_000_000_000);
+        assertEq(tickSize, 100);
         assertEq(minQuote, 10_000_000);
         assertEq(maxQuote, 5_000_000_000_000);
-        assertEq(taker, 7000);
-        assertEq(maker, 4000);
+        assertEq(taker, 2000);
+        assertEq(maker, 0);
     }
 
     function rpcUrl() external view returns (string memory) {
