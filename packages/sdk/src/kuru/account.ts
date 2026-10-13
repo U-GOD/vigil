@@ -4,12 +4,12 @@ import {
   buildAuthorizeAccountSignerRequest,
   buildAuthorizeAccountSignerTypedData,
   buildApproveErc20Request,
-  buildDepositRequest,
+  buildDepositToOwnerRequest,
   buildWithdrawRequest,
   type AuthorizeAccountSignerBySigParams,
   type AuthorizeAccountSignerParams,
   type AuthorizeAccountSignerTypedDataParams,
-  type DepositParams,
+  type DepositToOwnerParams,
   type WithdrawParams,
 } from "@toxicflow-labs/ts-sdk/account";
 import { accountCoreAbi } from "../abi.js";
@@ -59,10 +59,11 @@ export function approveTokenRequest(params: {
   });
 }
 
+/** Deposits to the owner's root account. AccountCore creates the account on first deposit. */
 export function depositRequest(
-  params: DepositParams & { accountCore: Address },
+  params: DepositToOwnerParams & { accountCore: Address },
 ): RequestLike {
-  return buildDepositRequest(params);
+  return buildDepositToOwnerRequest(params);
 }
 
 export function withdrawRequest(
@@ -112,11 +113,11 @@ export const accountPermissionAbi = [
   },
 ] as const;
 
-export function userRegistryRequest(accountCore: Address, user: Address): RequestLike {
+export function rootAccountIdRequest(accountCore: Address, user: Address): RequestLike {
   return {
     address: accountCore,
     abi: readAbi,
-    functionName: "userRegistry",
+    functionName: "rootAccountIdOf",
     args: [user],
   };
 }
@@ -162,22 +163,22 @@ export function signerAuthorizedRequest(
 }
 
 export type AccountOnboarding = {
-  claim: EncodedCall;
+  claim: EncodedCall | null;
   approve: EncodedCall;
   deposit: EncodedCall;
   accountId: RequestLike;
 };
 
-/** Faucet, approve, deposit. The account id is a follow-up read. */
+/** Faucet (when the network has one), approve, deposit. The account id is a follow-up read. */
 export function accountOnboardingCalls(params: {
-  faucet: Address;
+  faucet: Address | null;
   token: Address;
   accountCore: Address;
   user: Address;
   amount: bigint;
 }): AccountOnboarding {
   return {
-    claim: encodeRequest(claimUsdcRequest(params.faucet)),
+    claim: params.faucet === null ? null : encodeRequest(claimUsdcRequest(params.faucet)),
     approve: encodeRequest(
       approveAccountCoreRequest({
         token: params.token,
@@ -188,10 +189,11 @@ export function accountOnboardingCalls(params: {
     deposit: encodeRequest(
       depositRequest({
         accountCore: params.accountCore,
+        rootOwner: params.user,
         token: params.token,
         amount: params.amount,
       }),
     ),
-    accountId: userRegistryRequest(params.accountCore, params.user),
+    accountId: rootAccountIdRequest(params.accountCore, params.user),
   };
 }
