@@ -102,7 +102,7 @@ interface IKuruOrderBook {
         view
         returns (
             uint32 pricePrecision,
-            uint32 sizePrecision,
+            uint96 sizePrecision,
             uint32 tickSize,
             uint96 minQuoteNotional,
             uint96 maxQuoteNotional,
