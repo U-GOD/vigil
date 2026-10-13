@@ -47,7 +47,7 @@
     "gen:sessions": "node scripts/genSessions.mjs"
   },
   "dependencies": {
-    "@toxicflow-labs/ts-sdk": "0.1.1",
+    "@toxicflow-labs/ts-sdk": "0.3.0",
     "viem": "^2.38.0"
   },
   "devDependencies": {
