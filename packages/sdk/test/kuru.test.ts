@@ -1,7 +1,7 @@
 import { encodeFunctionData } from "viem";
 import {
   buildAuthorizeAccountSignerRequest,
-  buildDepositRequest as buildDepositFromAccount,
+  buildDepositToOwnerRequest,
 } from "@toxicflow-labs/ts-sdk/account";
 import {
   buildBatchRequest,
@@ -250,10 +250,13 @@ describe("slot manager", () => {
 });
 
 describe("account onboarding", () => {
-  it("claims with the faucet selector and deposits through the SDK", () => {
-    const claim = claimUsdcRequest(kuru.faucet);
-    expect(pluginCall(claim).to).toBe(kuru.faucet);
+  it("claims with the faucet selector and deposits to the owner through the SDK", () => {
+    const faucet = "0x25B1416FcD3400bE2D8F50bbe7Cf1101b8B891E9" as const;
+    const claim = claimUsdcRequest(faucet);
+    expect(pluginCall(claim).to).toBe(faucet);
     expect(pluginCall(claim).data).toBe("0x4e71d92d");
+    expect(kuru.faucet).toBeNull();
+    const owner = "0x00000000000000000000000000000000000000b2" as const;
 
     const amount = 1_000_000_000n;
     const approve = approveAccountCoreRequest({
@@ -265,14 +268,16 @@ describe("account onboarding", () => {
 
     const deposit = depositRequest({
       accountCore: kuru.accountCore,
+      rootOwner: owner,
       token: kuru.usdc,
       amount,
     });
     expect(pluginCall(deposit).to).toBe(kuru.accountCore);
     expect(pluginCall(deposit).data).toBe(
       sdkData(
-        buildDepositFromAccount({
+        buildDepositToOwnerRequest({
           accountCore: kuru.accountCore,
+          rootOwner: owner,
           token: kuru.usdc,
           amount,
         }),
@@ -292,14 +297,22 @@ describe("account onboarding", () => {
     );
 
     const plan = accountOnboardingCalls({
+      faucet,
+      token: kuru.usdc,
+      accountCore: kuru.accountCore,
+      user: auth.account,
+      amount,
+    });
+    expect(plan.claim?.data).toBe("0x4e71d92d");
+    const noFaucet = accountOnboardingCalls({
       faucet: kuru.faucet,
       token: kuru.usdc,
       accountCore: kuru.accountCore,
       user: auth.account,
       amount,
     });
-    expect(plan.claim.data).toBe("0x4e71d92d");
-    expect(plan.accountId.functionName).toBe("userRegistry");
+    expect(noFaucet.claim).toBeNull();
+    expect(plan.accountId.functionName).toBe("rootAccountIdOf");
     expect(plan.accountId.args).toEqual([auth.account]);
   });
 });
