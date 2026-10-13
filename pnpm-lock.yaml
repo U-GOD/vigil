@@ -91,8 +91,8 @@ importers:
   packages/sdk:
     dependencies:
       '@toxicflow-labs/ts-sdk':
-        specifier: 0.1.1
-        version: 0.1.1(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+        specifier: 0.3.0
+        version: 0.3.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
       viem:
         specifier: ^2.38.0
         version: 2.56.8(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
@@ -163,8 +163,8 @@ importers:
   services/indexer:
     dependencies:
       '@toxicflow-labs/ts-sdk':
-        specifier: 0.1.1
-        version: 0.1.1(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+        specifier: 0.3.0
+        version: 0.3.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
       '@vigil/riskmodel':
         specifier: workspace:*
         version: link:../../packages/riskmodel
@@ -1802,8 +1802,8 @@ packages:
     peerDependencies:
       '@babel/runtime': 7.x
 
-  '@toxicflow-labs/ts-sdk@0.1.1':
-    resolution: {integrity: sha512-zFOyaIDtXm8UMBpGAOU5rq8jheUTZcQF4Rn1BsgG6WK/B/JffrQ5+ZhU1jbBMrq6oyP6rJP5HsoY12xDGCr4dg==}
+  '@toxicflow-labs/ts-sdk@0.3.0':
+    resolution: {integrity: sha512-k+9EZr4gbDHA+O5Oz1Kxd1tVsiPTXLJVxwJZtU3zGS7jSA9fHjcieKm2mnXzaOsJFeTeBMmwkvIEEtKIrzCGSQ==}
     engines: {node: '>=20'}
 
   '@types/chai@5.2.3':
@@ -6081,7 +6081,7 @@ snapshots:
     transitivePeerDependencies:
       - '@sentry/core'
 
-  '@toxicflow-labs/ts-sdk@0.1.1(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)':
+  '@toxicflow-labs/ts-sdk@0.3.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)':
     dependencies:
       viem: 2.56.8(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
     transitivePeerDependencies:
