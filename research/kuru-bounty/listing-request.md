@@ -4,7 +4,7 @@ To: Kuru listings / protocol
 From: Vigil
 Network: Monad testnet (chain 10143)
 Date: 2026-09-21
-Status: drafted, not sent
+Status: sent 2026-10-12 against the old SpotRouter; Kuru replied 2026-10-13. Revised below for the current testnet set.
 
 ## Ask
 
@@ -19,7 +19,7 @@ A Closure Note is a fully collateralized, capped claim on the official close-to-
 - Anyone deposits USDC and receives 1 CN-UP + 1 CN-DN.
 - The pair always redeems for exactly 1 USDC after the official opening print (or 0.5 / 0.5 if the oracle misses).
 - Each `(ticker, session, kUp, kDn)` pair is its own ERC-20 pair. Notes from different weekends are not fungible.
-- Quote asset: Kuru testnet USDC `0xEe0722ead54f1B4fe97bE399Be43BC0226a6f97E`.
+- Quote asset: Kuru testnet USDC `0xb01DC575a7ef75e58A05D2bde73ab79f8e7dd0Be` (current set: SpotRouter `0x008200AD02fCb7020B019D11Cbabd32FecE1De78`, AccountCore `0xe08573a1Ecc4aa507c9626071fA0c4513caf7906`, WithdrawalLimiter `0x8cF002a44CeD91Ab93A5E4E6F893F1f7b5a9c0e5`).
 
 This is not a prediction-market binary, not a perpetual, and not a wrapper of MON/USDC.
 
@@ -62,9 +62,10 @@ Price lives in `[0, 1]`. At mid 0.5 the 10 USDC floor is 20 notes.
 ## What we need from Kuru
 
 1. `AccountCore` `spotTokenEnabled` = true on each CN token (and USDC, already true).
-2. An OrderBook proxy per pair, registered in SpotRouter and AccountCore.
-3. Confirmation of the listing turnaround once we send addresses.
-4. Optional: a seed of passive-band inventory, or an introduction to a testnet LP.
+2. A WithdrawalLimiter price source per CN token. Kuru's feeds are Kraken-backed `ManualPriceSource` contracts with a 300 s max age, and CN legs have no Kraken pair, so Vigil supplies one per note. Interface still to be confirmed with Kuru (`priceUsd18()` is what Kuru's sources expose).
+3. An OrderBook proxy per pair, registered in SpotRouter and AccountCore.
+4. Confirmation of the listing turnaround once we send addresses.
+5. Optional: a seed of passive-band inventory, or an introduction to a testnet LP.
 
 ## What we ship
 
