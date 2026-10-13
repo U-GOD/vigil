@@ -13,6 +13,12 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.104.0(react@19.3.0)
+      '@vigil/api':
+        specifier: workspace:*
+        version: link:../../services/api
+      '@vigil/indexer':
+        specifier: workspace:*
+        version: link:../../services/indexer
       '@vigil/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
