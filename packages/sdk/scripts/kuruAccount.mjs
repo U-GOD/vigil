@@ -1,8 +1,9 @@
 /**
- * Faucet USDC, approve AccountCore, deposit, read account id.
+ * Approve AccountCore, deposit to the owner's root account, read account id.
+ * Kuru test USDC is admin-minted; there is no public faucet.
  *
  * Dry-run (no key, no broadcast):
- *   node packages/sdk/scripts/kuruAccount.mjs
+ *   DEPLOYER_ADDRESS=0x... node packages/sdk/scripts/kuruAccount.mjs
  *
  * Broadcast (needs MON for gas):
  *   node packages/sdk/scripts/kuruAccount.mjs --broadcast
@@ -15,12 +16,13 @@ import {
   createWalletClient,
   encodeFunctionData,
   http,
+  zeroAddress,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import {
   buildApproveErc20Request,
   buildAuthorizeAccountSignerRequest,
-  buildDepositRequest,
+  buildDepositToOwnerRequest,
 } from "@toxicflow-labs/ts-sdk/account";
 import { accountCoreAbi } from "@toxicflow-labs/ts-sdk/abi";
 
@@ -31,20 +33,13 @@ const chain = {
   rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz"] } },
 };
 
-const faucet = "0x25B1416FcD3400bE2D8F50bbe7Cf1101b8B891E9";
-const usdc = "0xEe0722ead54f1B4fe97bE399Be43BC0226a6f97E";
-const accountCore = "0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22";
+const usdc = "0xb01DC575a7ef75e58A05D2bde73ab79f8e7dd0Be";
+const accountCore = "0xe08573a1Ecc4aa507c9626071fA0c4513caf7906";
 const amount = BigInt(process.env.DEPOSIT_AMOUNT ?? "1000000000");
-
-const faucetAbi = [
-  {
-    type: "function",
-    name: "claim",
-    stateMutability: "nonpayable",
-    inputs: [],
-    outputs: [],
-  },
-];
+const key = process.env.DEPLOYER_PRIVATE_KEY;
+const owner = key
+  ? privateKeyToAccount(key).address
+  : (process.env.DEPLOYER_ADDRESS ?? zeroAddress);
 
 function encode(request) {
   return {
@@ -58,16 +53,11 @@ function encode(request) {
   };
 }
 
-const claim = {
-  to: faucet,
-  data: encodeFunctionData({ abi: faucetAbi, functionName: "claim" }),
-  value: 0n,
-};
 const approve = encode(
   buildApproveErc20Request({ token: usdc, spender: accountCore, amount }),
 );
 const deposit = encode(
-  buildDepositRequest({ accountCore, token: usdc, amount }),
+  buildDepositToOwnerRequest({ accountCore, rootOwner: owner, token: usdc, amount }),
 );
 
 const rpc = process.env.MONAD_RPC_URL ?? chain.rpcUrls.default.http[0];
@@ -80,7 +70,6 @@ if (!process.argv.includes("--broadcast")) {
   console.log(
     JSON.stringify(
       {
-        claim: printable(claim),
         approve: printable(approve),
         deposit: printable(deposit),
       },
@@ -89,20 +78,19 @@ if (!process.argv.includes("--broadcast")) {
     ),
   );
   console.log(
-    "account id is AccountCore.userRegistry(deployer) after the deposit confirms",
+    "account id is AccountCore.rootAccountIdOf(owner) after the deposit confirms",
   );
   console.log(
     "TRADE-only signer: read ACCOUNT_PERMISSION_TRADE, then authorizeAccountSigner with that bit",
   );
 } else {
-  const key = process.env.DEPLOYER_PRIVATE_KEY;
   if (!key) throw new Error("DEPLOYER_PRIVATE_KEY is required to broadcast");
   const account = privateKeyToAccount(key);
   const transport = http(rpc);
   const wallet = createWalletClient({ account, chain, transport });
   const pub = createPublicClient({ chain, transport });
 
-  for (const call of [claim, approve, deposit]) {
+  for (const call of [approve, deposit]) {
     const hash = await wallet.sendTransaction({
       to: call.to,
       data: call.data,
@@ -141,7 +129,7 @@ if (!process.argv.includes("--broadcast")) {
   const accountId = await pub.readContract({
     address: accountCore,
     abi: accountCoreAbi,
-    functionName: "userRegistry",
+    functionName: "rootAccountIdOf",
     args: [account.address],
   });
   console.log("accountId", accountId.toString());
