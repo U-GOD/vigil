@@ -129,7 +129,7 @@ Write the adapter into `LISTING_ADAPTER` and `packages/sdk/src/deployments/10143
 
 **Listing.** `research/kuru-bounty/listing-request.md` was drafted on 2026-09-21 and has not been sent. No Closure Note book is registered.
 
-**Dated fallback (decided 2026-09-23).** If Kuru has not registered the CN books by 2026-10-07, note trading moves to a Vigil-operated RFQ/escrow labelled as a temporary venue. That escrow is not part of this phase. Until a bind succeeds, keepers and the plugin refuse the market. Encoder tests target the live MON/USDC book `0xfdbE356828c8f5A5d5ed4f69ddE0816f4058Ef61`. That book is not a Closure Note market.
+**Dated fallback (decided 2026-09-23).** If Kuru has not registered the CN books by 2026-10-07, note trading moves to a Vigil-operated RFQ/escrow labelled as a temporary venue. That escrow is not part of this phase. Until a bind succeeds, keepers and the plugin refuse the market. Encoder tests target the live MON/USDC book `0xD2F64EaF7E85688802d24C18ea268C365533b344` on Kuru's current testnet set (SpotRouter `0x008200AD02fCb7020B019D11Cbabd32FecE1De78`). The earlier set (SpotRouter `0xba24…c697`) is no longer listed by Kuru. That book is not a Closure Note market.
 
 **BLOCKED:** deployer still has 0 MON, so the faucet deposit, a listing bind, and a passive seed cannot be broadcast. The listing request has not been sent.
 
