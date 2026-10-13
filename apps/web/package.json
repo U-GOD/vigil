@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm --filter @vigil/sdk build && next build",
+    "build": "pnpm --filter \"@vigil/web^...\" build && next build",
     "start": "next start",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run"
@@ -12,6 +12,8 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.2",
     "@wagmi/core": "2.22.1",
+    "@vigil/api": "workspace:*",
+    "@vigil/indexer": "workspace:*",
     "@vigil/sdk": "workspace:*",
     "next": "^15.5.4",
     "react": "^19.1.1",
