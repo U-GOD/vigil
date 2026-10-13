@@ -38,7 +38,7 @@ export {
   depositRequest,
   signerAuthorizedRequest,
   spotReservedRequest,
-  userRegistryRequest,
+  rootAccountIdRequest,
   withdrawRequest,
 } from "./kuru/account.js";
 export { encodeRequest, keeperCall, pluginCall } from "./kuru/encode.js";
