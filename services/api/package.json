@@ -5,6 +5,16 @@
   "type": "module",
   "main": "./dist/cli.js",
   "types": "./dist/cli.d.ts",
+  "exports": {
+    "./routes": {
+      "development": {
+        "types": "./src/routes.ts",
+        "import": "./src/routes.ts"
+      },
+      "types": "./dist/routes.d.ts",
+      "import": "./dist/routes.js"
+    }
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
