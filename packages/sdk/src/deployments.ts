@@ -5,7 +5,8 @@ export type KuruAddresses = {
   accountCore: Address;
   spotRouter: Address;
   usdc: Address;
-  faucet: Address;
+  /** Kuru's current testnet set has no public faucet; test USDC is admin-minted. */
+  faucet: Address | null;
   monUsdc: Address;
 };
 
@@ -52,7 +53,7 @@ function parseDeployments(raw: typeof raw10143): NetworkDeployments {
       accountCore: asAddress(raw.kuru.accountCore, "kuru.accountCore"),
       spotRouter: asAddress(raw.kuru.spotRouter, "kuru.spotRouter"),
       usdc: asAddress(raw.kuru.usdc, "kuru.usdc"),
-      faucet: asAddress(raw.kuru.faucet, "kuru.faucet"),
+      faucet: optionalAddress(raw.kuru.faucet, "kuru.faucet"),
       monUsdc: asAddress(raw.kuru.monUsdc, "kuru.monUsdc"),
     },
     pyth: asAddress(raw.pyth, "pyth"),
