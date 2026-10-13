@@ -29,17 +29,9 @@ Desks that quote tokenized equities and currently pull size when the underlying 
 
 ## First listing set
 
-Five names, two symmetric caps, one session to start. Ten base tokens, twenty books (UP and DN each).
+The factory is deployed on chain 10143. Session `20261012` has thirty markets: NVDA, AAPL, TSLA, MSFT and AMZN, each at caps 5/5, 10/10, 15/15, 25/25, 10/25 and 25/10. That session has ended, so the books we ask for will be for the notes of an upcoming session. Example pair (NVDA 5/5, 6 decimals): CN-UP `0x9e71d065fE9C492F6088652883867Cbd2A942e11`, CN-DN `0x021E4B3d7D25cE2DbB313bF9DA92D2f54f0300E9`.
 
-| Ticker | Caps | Legs |
-| --- | --- | --- |
-| NVDA | 10%, 25% | CN-UP, CN-DN |
-| AAPL | 10%, 25% | CN-UP, CN-DN |
-| TSLA | 10%, 25% | CN-UP, CN-DN |
-| MSFT | 10%, 25% | CN-UP, CN-DN |
-| SPY | 10%, 25% | CN-UP, CN-DN |
-
-Token addresses will follow once the factory is deployed. We will send the address list in one message.
+The listing adapter binds a book only when its quote token is the market's collateral. The session `20261012` notes are collateralized in test VUSD `0xBE05889295edCaA4c279B2E2038210Ac11396f40`. Books quoted in Kuru USDC need markets collateralized in Kuru USDC; books quoted in VUSD need VUSD whitelisted and priced on Kuru.
 
 ## Requested book spec (identical on every CN market)
 
@@ -54,10 +46,10 @@ Token addresses will follow once the factory is deployed. We will send the addre
 | `passiveSpreadTicks` | `50` |
 | `minQuoteNotional` | `10_000_000` (10 USDC) |
 | `maxQuoteNotional` | `5_000_000_000_000` |
-| `takerFeePps` | `7000` |
-| `makerFeePps` | `4000` |
+| `takerFeePps` | Kuru default (`2000` on the live MON/USDC book) |
+| `makerFeePps` | Kuru default (`0` on the live MON/USDC book) |
 
-Price lives in `[0, 1]`. At mid 0.5 the 10 USDC floor is 20 notes.
+Price lives in `[0, 1]`. At mid 0.5 the 10 USDC floor is 20 notes. Fees follow Kuru's schedule; `CN_BOOK_SPEC` in the SDK still carries the earlier 7000/4000 and is updated once Kuru confirms.
 
 ## What we need from Kuru
 
