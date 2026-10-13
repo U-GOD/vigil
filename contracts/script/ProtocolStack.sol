@@ -23,8 +23,8 @@ import {TickerSet} from "./TickerSet.sol";
 /// @notice Deploys the live stack. Prints come from PrintOracle. InjectedPrintOracle is not used.
 abstract contract ProtocolStack {
     address internal constant PYTH = 0x2880aB155794e7179c9eE2e38200202908C17B43;
-    address internal constant ROUTER = 0xba24a1042701f06e8F7edCF04389260D1Fa4c697;
-    address internal constant ACCOUNT_CORE = 0x6384e9b2Bf3b65e1535403a0A543b5FDA905eE22;
+    address internal constant ROUTER = 0x008200AD02fCb7020B019D11Cbabd32FecE1De78;
+    address internal constant ACCOUNT_CORE = 0xe08573a1Ecc4aa507c9626071fA0c4513caf7906;
 
     struct Config {
         address owner;
